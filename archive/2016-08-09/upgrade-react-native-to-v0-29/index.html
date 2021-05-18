@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="BelinChung&#39;s Blog">
+    <title>BelinChung&#39;s Blog - 升级 react-native 到 v0.29.x 后 Android 平台部分插件无法使用的问题</title>
+    <meta name="author" content="BelinChung">
+    <meta name="description" content="“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”">
+    <link rel="icon" href="/assets/images/favicon.ico">
+    
+        <link rel="alternative" type="application/atom+xml" title="RSS" href="atom.xml">
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-44784593-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+</head>
+
+    <body>
+        <div id="blog">
+            <header id="header">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars "></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="https://dearb.me">BelinChung&#39;s Blog</a>
+    </h1>
+    
+        <a class="header-picture-link" href="/#about">
+            <img class="header-picture" src="/assets/images/avatar.png"/>
+        </a>
+    
+</header>
+            <nav id="sidebar">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.png"/>
+                
+            </a>
+            <span class="sidebar-profile-name hide-md">BelinChung</span>
+            <span class="sidebar-profile-subtitle hide-md">a F2er</span>
+        </div>
+    
+    <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc hide-md">Home</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc hide-md">Categories</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc hide-md">Archives</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc hide-md">About me</span>
+                </a>
+            </li>
+        
+    </ul>
+    
+        <div class="sidebar-description">“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”</div>
+    
+
+    <ul class="sidebar-icons">
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-github" href="https://github.com/Belinchung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-twitter" href="https://twitter.com/BelinChung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-envelope-o" href="mailto://belichung@gmail.com" target="_blank">
+                
+                </a>
+            </li>
+        
+    </ul>
+
+    <div class="links">
+        <span>Links</span>
+        <ul class="list">
+            
+                <li>
+                    
+                        <a href="https://love.dearb.me" target="_blank">
+                    
+                        <span class="sidebar-button-desc hide-md">Dearx</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+</nav>
+            <div id="main">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+        <div class="post-header main-content-wrap">
+    
+        <h1 class="post-title" itemprop="headline">升级 react-native 到 v0.29.x 后 Android 平台部分插件无法使用的问题</h1>
+    
+    
+</div>
+    
+    <div class="post-content markdown main-content-wrap" itemprop="articleBody">
+        <p>首先我们来看一下官方的 Changelog 这个版本有哪些 breaking changes。其中大部分变更暂时我还没有使用到，所以就忽略。但是 Android 有个变更貌似改变挺大了，也直接导致了大部分的第三方插件直接无法使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Change the application template (49f20f4) - @foghina</div><div class="line">* Plugins which pass activity reference in the constructor need to be updated to extend ReactContextBaseJavaModule use getCurrentActivity to get the activity reference. This change is backward compatible.</div><div class="line">* Apps need to be migrated to use the latest template</div></pre></td></tr></table></figure>
+<p>大概的意思是：这个版本我们变更了 APP 的模板，如果你的插件选择在构造函数中传递当前的 activity，那么在这个版本中需要升级到通过继承 ReactContextBaseJavaModule 来获取当前的 activity，这个改变是可以向下兼容的。<br><a id="more"></a></p>
+<h4 id="部分第三方插件无法使用了"><a href="#部分第三方插件无法使用了" class="headerlink" title="部分第三方插件无法使用了"></a>部分第三方插件无法使用了</h4><p>其中我正在使用的 <a href="https://github.com/jaysoo/react-native-extra-dimensions-android" target="_blank" rel="external">react-native-extra-dimensions-android</a> 也是遇到了相同的问题，而且好像作者好像弃坑了，所以只能自己尝试按照上面官方的建议进行改造升级</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">error: incompatible types &lt;anonymous ReactNativeHost&gt; cannot be converted to Ativity </div><div class="line">			new ExtraDimensionsPackage(this) &lt;--</div></pre></td></tr></table></figure>
+<h4 id="尝试改造第三方插件"><a href="#尝试改造第三方插件" class="headerlink" title="尝试改造第三方插件"></a>尝试改造第三方插件</h4><p>自己动手，丰衣足食。下面的步骤是针对 react-native-extra-dimensions-android 进行改造，但是整个改造的过程是适合其他遇到相同问题的插件，万变不离其宗。</p>
+<h5 id="在-MainApplication-java-注册插件"><a href="#在-MainApplication-java-注册插件" class="headerlink" title="在 MainApplication.java 注册插件"></a>在 MainApplication.java 注册插件</h5><p>从 v0.29.0 开始，Android 项目新增了 <code>MainApplication.java</code> 模板，大部分以前在 <code>MainActivity.java</code> 的逻辑迁移到了这里</p>
+<p>Register module (in MainApplication.java)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> ca.jaysoo.extradimensions.ExtraDimensionsPackage;  <span class="comment">// &lt;--- import</span></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainApplication</span> <span class="keyword">extends</span> <span class="title">Application</span> <span class="keyword">implements</span> <span class="title">ReactApplication</span> </span>&#123;</div><div class="line">  ......</div><div class="line">  <span class="function"><span class="keyword">protected</span> List&lt;ReactPackage&gt; <span class="title">getPackages</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> Arrays.&lt;ReactPackage&gt;asList(</div><div class="line">      <span class="keyword">new</span> MainReactPackage(),</div><div class="line">      <span class="keyword">new</span> ExtraDimensionsPackage()  <span class="comment">// &lt;--- add here</span></div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">  ......</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面只是代码位置迁移，只是 new 的时候少了 <code>this</code> 这个参数，因为这时候 <code>this</code> 已经不再是 <code>current activity</code> 了，这也是导致整个问题的重要原因！</p>
+<h5 id="尝试通过其他方法找回-Current-Activity"><a href="#尝试通过其他方法找回-Current-Activity" class="headerlink" title="尝试通过其他方法找回 Current Activity"></a>尝试通过其他方法找回 Current Activity</h5><p>因为 Current Activity 已经不再通过构造函数传递进来了，我们只能通过其他的方式尝试找回 <code>Current Activity</code></p>
+<p><code>ExtraDimensionsPackage</code> 类中已经没有 activity 相关的逻辑了，那我们清理一下无用的代码。</p>
+<p><img src="https://bstatic.lufeng.info/2016-08-09-QQ20160809-0@2x.png" alt="image"></p>
+<p>接下来就是重点了，修改 <code>ExtraDimensionsModule</code> 类中相关的代码。按照官方的建议通过继承 <code>ReactContextBaseJavaModule</code> 来获取 <code>getCurrentActivity()</code> 这个方法，看起来好容易就可以完成啦！！</p>
+<p><img src="https://bstatic.lufeng.info/2016-08-09-14707278487220.jpg" alt="image"></p>
+<p>继承、重写生命周期的部分方法…上面其实都是例行书写，对于改造是没有任何卵用的。<br>接下来按道理我们只用全局替换 <code>mCurrentActivity</code> 成 <code>getCurrentActivity()</code> 就可以大功告成了。</p>
+<p>编译、运行…哎呀，我艹，没有 <code>getCurrentActivity()</code> 这个方法？不是官方推荐的吗？方法呢？被狗吃了吗？<br>后来我尝试去翻源码，60%确定这个方法不存在或者没有暴露出来，但是毕竟我只是个小前端，可能用错了吧。</p>
+<p>（16.08.16更新）在 RN0.31.0 中 <code>getCurrentActivity()</code> 被 public 出来了，基本上我上面说的是对的，这个方法被狗吃了。具体的 commit 可以参阅：<a href="https://github.com/facebook/react-native/commit/760656461197605ee26769ed73989f78e4753038" target="_blank" rel="external">7606564</a></p>
+<p>先不管了，那就查查还有什么方法可以获取到 <code>Current Activity</code>，Google 告诉我 <code>WindowManager</code> 也是可以拿到当前活跃的 activity 的！</p>
+<p><img src="https://bstatic.lufeng.info/2016-08-09-14707282814498.jpg" alt="image"></p>
+<p> 大功告成！！</p>
+<ul>
+<li>相关 Commit Diff: <a href="https://github.com/BelinChung/react-native-extra-dimensions-android/commit/6f1a73d31787b7e13cf4f36eee2bb9c7332f69a1" target="_blank" rel="external">BelinChung/react-native-extra-dimensions-android#6f1a73d3</a></li>
+<li>相关项目 <a href="https://github.com/BelinChung/react-native-hiapp" target="_blank" rel="external">BelinChung/react-native-hiapp</a></li>
+</ul>
+
+        
+            
+        
+    </div>
+    <div class="post-footer main-content-wrap">
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2016-10-13/talk-about-wechat-app/"  data-tooltip="通过重写一个 Demo 小项目尝鲜微信小程序以及自己的一些看法">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2016-05-19/Electron-APP-support-download-progress/" data-tooltip="Electron APP 支持应用内下载文件及显示下载进度">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://dearb.me/archive/2016-08-09/upgrade-react-native-to-v0-29/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://dearb.me/archive/2016-08-09/upgrade-react-native-to-v0-29/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://dearb.me/archive/2016-08-09/upgrade-react-native-to-v0-29/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                <i class="fa fa-comment-o"></i>
+            </a>
+        </li>
+    </ul>
+    
+</div>
+
+
+        
+            <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+        
+    </div>
+    <div class="post-bottom-bar">
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2016-10-13/talk-about-wechat-app/"  data-tooltip="通过重写一个 Demo 小项目尝鲜微信小程序以及自己的一些看法">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2016-05-19/Electron-APP-support-download-progress/" data-tooltip="Electron APP 支持应用内下载文件及显示下载进度">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://dearb.me/archive/2016-08-09/upgrade-react-native-to-v0-29/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://dearb.me/archive/2016-08-09/upgrade-react-native-to-v0-29/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://dearb.me/archive/2016-08-09/upgrade-react-native-to-v0-29/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                <i class="fa fa-comment-o"></i>
+            </a>
+        </li>
+    </ul>
+    
+</div>
+
+
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <div class="copyrights">
+        Copyrights &copy; 2021 BelinChung. All Rights Reserved.
+        
+    </div>
+    <div class="copyrights">
+    	Powered by <a href="http://hexo.io/" target="_blank" rel="nofollow">Hexo</a>  
+    </div>
+</footer>
+
+            </div>
+        </div>
+        <div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar.png"/>
+        
+            <h4 id="about-card-name">BelinChung</h4>
+        
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Guangzhou China
+            </h5>
+        
+    </div>
+</div>
+        <div id="cover" style="background-image:url('/assets/images/background.png');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script.min.js"></script>
+<!--SCRIPTS END-->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'dearb';
+        (function() {
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+</html>

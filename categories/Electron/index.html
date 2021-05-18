@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="BelinChung&#39;s Blog">
+    <title>BelinChung&#39;s Blog - category : Electron</title>
+    <meta name="author" content="BelinChung">
+    <meta name="description" content="“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”">
+    <link rel="icon" href="/assets/images/favicon.ico">
+    
+        <link rel="alternative" type="application/atom+xml" title="RSS" href="atom.xml">
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-44784593-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+</head>
+
+    <body>
+        <div id="blog">
+            <header id="header">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars "></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="https://dearb.me">BelinChung&#39;s Blog</a>
+    </h1>
+    
+        <a class="header-picture-link" href="/#about">
+            <img class="header-picture" src="/assets/images/avatar.png"/>
+        </a>
+    
+</header>
+            <nav id="sidebar">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.png"/>
+                
+            </a>
+            <span class="sidebar-profile-name hide-md">BelinChung</span>
+            <span class="sidebar-profile-subtitle hide-md">a F2er</span>
+        </div>
+    
+    <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc hide-md">Home</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc hide-md">Categories</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc hide-md">Archives</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc hide-md">About me</span>
+                </a>
+            </li>
+        
+    </ul>
+    
+        <div class="sidebar-description">“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”</div>
+    
+
+    <ul class="sidebar-icons">
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-github" href="https://github.com/Belinchung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-twitter" href="https://twitter.com/BelinChung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-envelope-o" href="mailto://belichung@gmail.com" target="_blank">
+                
+                </a>
+            </li>
+        
+    </ul>
+
+    <div class="links">
+        <span>Links</span>
+        <ul class="list">
+            
+                <li>
+                    
+                        <a href="https://love.dearb.me" target="_blank">
+                    
+                        <span class="sidebar-button-desc hide-md">Dearx</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+</nav>
+            <div id="main">
+                
+    
+<section class="post-group main-content-wrap">
+    
+        
+        
+                <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+        
+            <div class="post-wrap">
+                <div class="post-header">
+                    <h1 class="post-title" itemprop="headline">
+                        
+                                <a class="link-unstyled" href="https://dearb.me/archive/2017-11-01/electron-screenshot-base-on-macos-screencapture/">使用 macOS 的 screencapture 程序为 Electron 应用实现原生截图功能</a>
+                        
+                    </h1>
+                    
+                </div>
+                <div class="post-excerpt" itemprop="articleBody">
+                    
+                        <p>基于 Electron 开发即时通讯 APP，截图功能后期势必成为一个刚需的功能。Webkit 中的 <code>desktopCapture</code> API 只能截取当前窗口的画面，用户的实际需求还是需要全屏选取范围截取。如果需要一个跨平台的插件实现，可能需要使用原生开发出一个截图应用，然后再暴露给 Electron 调用。   </p>
+<p>如果你只是需要实现 macOS 平台的截图功能，那么内置的 <code>screencapture</code> 程序也许已经满足了我们的使用需求。我们先在 terminal 中查看下 <code>screencapture</code> 程序有哪些 API 提供</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">screencapture -h</div><div class="line">screencapture: illegal option -- h</div><div class="line">usage: screencapture [-icMPmwsWxSCUtoa] [files]</div><div class="line">  -c         force screen capture to go to the clipboard</div><div class="line">  -b         capture Touch Bar - non-interactive modes only</div><div class="line">  -C         capture the cursor as well as the screen. only <span class="keyword">in</span> non-interactive modes</div><div class="line">  ...</div><div class="line">  ...</div></pre></td></tr></table></figure>
+                    
+                    
+                        
+                            <a href="https://dearb.me/archive/2017-11-01/electron-screenshot-base-on-macos-screencapture/" class="post-excerpt_link link "><i class="fa fa-arrow-right"></i> Continue reading</a>
+                            
+                        
+                    
+                    
+                </div>
+            </div>
+            
+        </article>
+    
+        
+        
+                <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+        
+            <div class="post-wrap">
+                <div class="post-header">
+                    <h1 class="post-title" itemprop="headline">
+                        
+                                <a class="link-unstyled" href="https://dearb.me/archive/2016-05-19/Electron-APP-support-download-progress/">Electron APP 支持应用内下载文件及显示下载进度</a>
+                        
+                    </h1>
+                    
+                </div>
+                <div class="post-excerpt" itemprop="articleBody">
+                    
+                        <p>最近把公司一个 Web APP 项目用 Electron 封装了一个 Mac 客户端，主要是弥补了 Web 浏览器的一些先天不足：</p>
+<ul>
+<li>支持原生的通知</li>
+<li>支持原生的 icon 未读提醒</li>
+<li>支持原生的系统托盘</li>
+<li>增强网络状态变更的感知</li>
+</ul>
+<p>其中以前下载方式是通过打开系统浏览器进行文件下载的。因为文件需要鉴权，还得携带一些敏感的 cookie、token 过去，感觉不安全，所以希望文件下载能在 APP 内完成<br>
+                    
+                    
+                        
+                            <a href="https://dearb.me/archive/2016-05-19/Electron-APP-support-download-progress/" class="post-excerpt_link link "><i class="fa fa-arrow-right"></i> Continue reading</a>
+                            
+                        
+                    
+                    
+                </div>
+            </div>
+            
+        </article>
+    
+    <div class="pagination-bar">
+    <ul class="pagination">
+        
+        
+        <li class="pagination-number">Page 1 of 1</li>
+    </ul>
+</div>
+</section>
+
+
+                <footer id="footer" class="main-content-wrap">
+    <div class="copyrights">
+        Copyrights &copy; 2021 BelinChung. All Rights Reserved.
+        
+    </div>
+    <div class="copyrights">
+    	Powered by <a href="http://hexo.io/" target="_blank" rel="nofollow">Hexo</a>  
+    </div>
+</footer>
+
+            </div>
+        </div>
+        <div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar.png"/>
+        
+            <h4 id="about-card-name">BelinChung</h4>
+        
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Guangzhou China
+            </h5>
+        
+    </div>
+</div>
+        <div id="cover" style="background-image:url('/assets/images/background.png');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script.min.js"></script>
+<!--SCRIPTS END-->
+
+
+</html>

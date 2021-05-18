@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="BelinChung&#39;s Blog">
+    <title>BelinChung&#39;s Blog - 前端工程化之前端架构及项目实践（二）</title>
+    <meta name="author" content="BelinChung">
+    <meta name="description" content="“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”">
+    <link rel="icon" href="/assets/images/favicon.ico">
+    
+        <link rel="alternative" type="application/atom+xml" title="RSS" href="atom.xml">
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-44784593-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+</head>
+
+    <body>
+        <div id="blog">
+            <header id="header">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars "></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="https://dearb.me">BelinChung&#39;s Blog</a>
+    </h1>
+    
+        <a class="header-picture-link" href="/#about">
+            <img class="header-picture" src="/assets/images/avatar.png"/>
+        </a>
+    
+</header>
+            <nav id="sidebar">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.png"/>
+                
+            </a>
+            <span class="sidebar-profile-name hide-md">BelinChung</span>
+            <span class="sidebar-profile-subtitle hide-md">a F2er</span>
+        </div>
+    
+    <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc hide-md">Home</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc hide-md">Categories</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc hide-md">Archives</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc hide-md">About me</span>
+                </a>
+            </li>
+        
+    </ul>
+    
+        <div class="sidebar-description">“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”</div>
+    
+
+    <ul class="sidebar-icons">
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-github" href="https://github.com/Belinchung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-twitter" href="https://twitter.com/BelinChung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-envelope-o" href="mailto://belichung@gmail.com" target="_blank">
+                
+                </a>
+            </li>
+        
+    </ul>
+
+    <div class="links">
+        <span>Links</span>
+        <ul class="list">
+            
+                <li>
+                    
+                        <a href="https://love.dearb.me" target="_blank">
+                    
+                        <span class="sidebar-button-desc hide-md">Dearx</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+</nav>
+            <div id="main">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+        <div class="post-header main-content-wrap">
+    
+        <h1 class="post-title" itemprop="headline">前端工程化之前端架构及项目实践（二）</h1>
+    
+    
+</div>
+    
+    <div class="post-content markdown main-content-wrap" itemprop="articleBody">
+        <h3 id="构建工具-FIS-的使用"><a href="#构建工具-FIS-的使用" class="headerlink" title="构建工具 - FIS 的使用"></a>构建工具 - FIS 的使用</h3><p>13年下半年的时候，第一次接触前端的构建工具，那时候好像刚好在某个会议上百度宣布了 FIS 这个工具，然后就选择了 FIS （其实小部分的原因是因为有中文文档，这个习惯非常不好，我现在已经强制改掉了）。由于那时候前置知识比较欠缺，使用起来还是有点吃力的，但是基本的功能也在项目开发中起到了很大的帮助。嗯，那时候还比较菜，啥都不知道。</p>
+<p>后来来到了现在这个团队，根据公司内部已有的项目，改用了 Grunt 来作为项目的构建工具。那时候需求还比较简单，Grunt 并没有太多欠缺的地方。再后来，由我操刀对项目进行全面的重构，我再次选择了 FIS。</p>
+<p>由于前置知识的积累以及对 Grunt 的使用，再次使用 FIS 并没有遇到太多的阻碍。我想，如果你已经掌握了 Grunt，可以尝试下使用 FIS 作为某个项目的构建工具，应该会很快的清楚两者之间的差距。</p>
+<p>以下开始介绍 FIS 在我所跟的项目里的使用，并没有太基础的入门教程哦，官方的文档虽然写的烂七八糟的，但是还是可以看滴。实在不懂就可以搜索下 issue 或者加入官方基友群，900多号全国顶级互联网公司前端为你解答疑问！</p>
+<a id="more"></a>
+<h4 id="第三方组件的管理"><a href="#第三方组件的管理" class="headerlink" title="第三方组件的管理"></a>第三方组件的管理</h4><p>为了避免重复的制造轮子，一般项目中均会有一定数量的第三方组件，这些第三方的组件理应该不属于源码一样进行管理，而需要在一个地方用一个工具统一的管理它们，方便后期的维护。你可能比较熟悉的包管理工具是 Bower , FIS 内置的一个组件生态跟 Bower 其实是一样的理念。通过 <code>fis install</code> 等命令可以替代 Bower。之所以在选择中选择了 fis-components ，主要是因为：</p>
+<ul>
+<li>项目中使用了 mod.js ，需要遵循 commonJS ，fis-components 内置的转换工具可以转换任意的第三方组件</li>
+<li>我们需要可以管理我们内部的私有组件</li>
+</ul>
+<h5 id="配置项目组件依赖"><a href="#配置项目组件依赖" class="headerlink" title="配置项目组件依赖"></a>配置项目组件依赖</h5><p>在我们的根目录下面建立 <code>component.json</code> 依赖声明文件</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"protocol"</span>: <span class="string">"github"</span>,</div><div class="line">  <span class="attr">"gihub"</span>: &#123;</div><div class="line">    <span class="attr">"author"</span>: <span class="string">"fis-components"</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"gitlab"</span>: &#123;</div><div class="line">    <span class="attr">"domain"</span>: <span class="string">"http://gitlab.rd.mt/"</span>,</div><div class="line">    <span class="attr">"author"</span>: <span class="string">"fee-components"</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"dependencies"</span>: [</div><div class="line">    <span class="string">"jquery@~1.9.1"</span>,</div><div class="line">    <span class="string">"vue@~0.11.10"</span>,</div><div class="line">    <span class="string">"gitlab:fee-components/jquery-drag@~0.0.1"</span></div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在项目目录下，通过 <code>fis install</code> 安装或者更新第三方组件</p>
+<h5 id="转换一个第三方组件"><a href="#转换一个第三方组件" class="headerlink" title="转换一个第三方组件"></a>转换一个第三方组件</h5><p>将转换工具 <a href="https://github.com/fis-components/components" target="_blank" rel="external">fis-components/components</a> clone 回本地，在 <code>modules</code> 文件夹内新建一个组件的转换规则</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="meta">'use strict'</span>;</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> [</div><div class="line">        &#123;</div><div class="line">            repos: <span class="string">'https://github.com/jquery/jquery.git'</span>,</div><div class="line">            version: <span class="string">'1.9.1'</span>,</div><div class="line">            name: <span class="string">'jquery'</span>,</div><div class="line">            main: <span class="string">'jquery.js'</span>,</div><div class="line">            build: <span class="string">'npm install &amp;&amp; npm install grunt-cli &amp;&amp; ./node_modules/.bin/grunt'</span>,</div><div class="line">            mapping: [</div><div class="line">                &#123;</div><div class="line">                    reg: <span class="regexp">/\.min\.(js|css)$/</span>,</div><div class="line">                    release: <span class="literal">false</span></div><div class="line">                &#125;,</div><div class="line">                &#123;</div><div class="line">                    reg: <span class="regexp">/^\/dist\/(.*\.js)/</span>,</div><div class="line">                    release: <span class="string">'$1'</span></div><div class="line">                &#125;,</div><div class="line">                &#123;</div><div class="line">                    reg: <span class="regexp">/^\/README\.md$/</span>,</div><div class="line">                    release: <span class="string">'$&amp;'</span></div><div class="line">                &#125;,</div><div class="line">                &#123;</div><div class="line">                    reg: <span class="string">'*'</span>,</div><div class="line">                    release: <span class="literal">false</span></div><div class="line">                &#125;</div><div class="line">            ]</div><div class="line">        &#125;,</div><div class="line"></div><div class="line">        &#123;</div><div class="line">            version: <span class="string">'2.1.0'</span>,</div><div class="line">            build: <span class="string">'npm run build'</span>,</div><div class="line">            extend: <span class="string">'1.9.1'</span></div><div class="line">        &#125;</div><div class="line"></div><div class="line">    ]</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+<p>本地拉取远程源仓库代码，并执行转换 <code>node test.js modules/jquery.js</code> 。转换出来的是符合 CommonJs 规范的组件，并去掉了多余的文件。</p>
+<p>如果这是个公开的组件，将配置文件通过 Pull requests 提交回 FIS 组件生态；如果这是个私有组件，提交回内部的 gitlab。</p>
+<h5 id="使用一个第三方组件"><a href="#使用一个第三方组件" class="headerlink" title="使用一个第三方组件"></a>使用一个第三方组件</h5><p>像写 node.js 一样写前端代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">require(&apos;bootstrap/button&apos;);</div><div class="line">var $ = require(&apos;jquery&apos;);</div><div class="line"></div><div class="line"></div><div class="line">$(&apos;.btn&apos;).click(function() &#123;</div><div class="line">    alert(&apos;Magic&apos;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h4 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h4><p>借助 FIS，我们可以使项目组件化更加的容易。通过 <code>isMod</code> 标记文件为组件化文件，被标记成组件化的 JS 文件会进行组件化包装。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    reg: <span class="regexp">/\/modules\/([^\/]+)\/\1\.js$/</span>,</div><div class="line">    id: <span class="string">'$1'</span>,</div><div class="line">    isMod: <span class="literal">true</span></div><div class="line">&#125;,</div><div class="line">&#123;</div><div class="line">    reg: <span class="regexp">/^\/modules\/(.*)\.(js)$/i</span>,</div><div class="line">    isMod: <span class="literal">true</span>,</div><div class="line">    id: <span class="string">'$1'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里通过设置更短的 ID 进行依赖声明，这样我们就可以更方便的对一个组件进行引用 <code>require(&#39;modules/login&#39;)</code> </p>
+<p>同时，FIS 支持同名依赖自动引用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 这里 require 了 login 模块</span></div><div class="line"><span class="comment"> * 除了 module/login/login.js 的文件会被加载外 </span></div><div class="line"><span class="comment"> * 同级目录下的 module/login/login.css 也会被自动加载</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="built_in">require</span>(<span class="string">'modules/login'</span>);</div></pre></td></tr></table></figure>
+<h4 id="常规的性能优化"><a href="#常规的性能优化" class="headerlink" title="常规的性能优化"></a>常规的性能优化</h4><p><code>压缩资源</code> 通过 -o 指令可以对项目的资源进行压缩，包括 JS、CSS、HTML 等。压缩 HTML 需要额外插件支持 <a href="https://github.com/BelinChung/fis-optimizer-html-minifier" target="_blank" rel="external">BelinChung/fis-optimizer-html-minifier</a></p>
+<p><code>合并资源</code> 通过 -p 指令可以对项目的资源进行打包合并。这个在下面会独立说一下，现在没啥说的，可能后面需求不同，觉得有可以详细说的余地。</p>
+<p><code>添加MD5戳</code> 通过 -m 指令可以对项目的文件添加MD5戳。很多人停留在文件后面添加时间戳 xxx.js?t=xxxx 的时代，并仍希望继续做。通过对文件添加MD5戳进行“非覆盖式发布”的好处是：</p>
+<ul>
+<li>部署安全。每次上线，先上线静态资源，它不会覆盖线上文件，然后再上线html页面，就能切换资源了</li>
+<li>缓存策略非常简单。对静态资源进行强缓存，性能好，缓存策略也简单</li>
+<li>防止HTTP缓存投毒。这个我没接触到，只能说了解了下，具体可以看 <a href="http://www.cnblogs.com/index-html/p/wifi_hijack_3.html" target="_blank" rel="external">这里</a></li>
+</ul>
+<p><code>添加资源域名</code> 通过 -D 命令可以对项目的文件添加域名。配置项 <code>fis.config.set(&#39;roadmap.domain&#39;,&#39;http://cdn.domain.com&#39;);</code>，可以配置单机、多机，进行全部署或随机部署。</p>
+<h4 id="智能打包"><a href="#智能打包" class="headerlink" title="智能打包"></a>智能打包</h4><p>项目打包也是性能优化的一部分，独立开来讲，是因为每个项目的打包需求不一样，而且 FIS 提供了不同的打包方式来满足不同的需求。</p>
+<p>目前我在项目中通过额外的打包插件 <a href="https://github.com/fex-team/fis-packager-depscombine" target="_blank" rel="external">fex-team/fis-packager-depscombine</a> 进行打包。在 pack 中命中的文件，其依赖也会自动命中，意思就是指定某个入口的 HTML 文件，这个 HTML 依赖的所有 JS、CSS 都会被命中，打成一个合并包。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">fis.config.set(<span class="string">'pack'</span>, &#123;</div><div class="line">    <span class="string">'pkg/web_app.css'</span>: <span class="string">'index.html'</span>,</div><div class="line">    <span class="string">'pkg/web_app.js'</span>: <span class="string">'index.html'</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>最后会在 <code>pkg/</code> 文件夹内产出一个 all-in-one 的 <code>web_app.css</code>、<code>web_app.js</code></p>
+
+        
+            
+        
+    </div>
+    <div class="post-footer main-content-wrap">
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2016-02-29/osx-exp-share/"  data-tooltip="这些生产力 OS X APP 帮助我提供工作效率">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2015-06-03/front-end-architecture-and-project-practice-part-1/" data-tooltip="前端工程化之前端架构及项目实践（一）">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://dearb.me/archive/2015-06-03/front-end-architecture-and-project-practice-part-2/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://dearb.me/archive/2015-06-03/front-end-architecture-and-project-practice-part-2/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://dearb.me/archive/2015-06-03/front-end-architecture-and-project-practice-part-2/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                <i class="fa fa-comment-o"></i>
+            </a>
+        </li>
+    </ul>
+    
+</div>
+
+
+        
+            <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+        
+    </div>
+    <div class="post-bottom-bar">
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2016-02-29/osx-exp-share/"  data-tooltip="这些生产力 OS X APP 帮助我提供工作效率">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2015-06-03/front-end-architecture-and-project-practice-part-1/" data-tooltip="前端工程化之前端架构及项目实践（一）">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://dearb.me/archive/2015-06-03/front-end-architecture-and-project-practice-part-2/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://dearb.me/archive/2015-06-03/front-end-architecture-and-project-practice-part-2/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://dearb.me/archive/2015-06-03/front-end-architecture-and-project-practice-part-2/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                <i class="fa fa-comment-o"></i>
+            </a>
+        </li>
+    </ul>
+    
+</div>
+
+
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <div class="copyrights">
+        Copyrights &copy; 2021 BelinChung. All Rights Reserved.
+        
+    </div>
+    <div class="copyrights">
+    	Powered by <a href="http://hexo.io/" target="_blank" rel="nofollow">Hexo</a>  
+    </div>
+</footer>
+
+            </div>
+        </div>
+        <div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar.png"/>
+        
+            <h4 id="about-card-name">BelinChung</h4>
+        
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Guangzhou China
+            </h5>
+        
+    </div>
+</div>
+        <div id="cover" style="background-image:url('/assets/images/background.png');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script.min.js"></script>
+<!--SCRIPTS END-->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'dearb';
+        (function() {
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+</html>

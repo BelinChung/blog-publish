@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="BelinChung&#39;s Blog">
+    <title>BelinChung&#39;s Blog - [移动端抽奖刮刮卡] Html5 Canvas 实现的可刮涂层效果</title>
+    <meta name="author" content="BelinChung">
+    <meta name="description" content="“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”">
+    <link rel="icon" href="/assets/images/favicon.ico">
+    
+        <link rel="alternative" type="application/atom+xml" title="RSS" href="atom.xml">
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-44784593-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+</head>
+
+    <body>
+        <div id="blog">
+            <header id="header">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars "></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="https://dearb.me">BelinChung&#39;s Blog</a>
+    </h1>
+    
+        <a class="header-picture-link" href="/#about">
+            <img class="header-picture" src="/assets/images/avatar.png"/>
+        </a>
+    
+</header>
+            <nav id="sidebar">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.png"/>
+                
+            </a>
+            <span class="sidebar-profile-name hide-md">BelinChung</span>
+            <span class="sidebar-profile-subtitle hide-md">a F2er</span>
+        </div>
+    
+    <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc hide-md">Home</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc hide-md">Categories</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc hide-md">Archives</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc hide-md">About me</span>
+                </a>
+            </li>
+        
+    </ul>
+    
+        <div class="sidebar-description">“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”</div>
+    
+
+    <ul class="sidebar-icons">
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-github" href="https://github.com/Belinchung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-twitter" href="https://twitter.com/BelinChung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-envelope-o" href="mailto://belichung@gmail.com" target="_blank">
+                
+                </a>
+            </li>
+        
+    </ul>
+
+    <div class="links">
+        <span>Links</span>
+        <ul class="list">
+            
+                <li>
+                    
+                        <a href="https://love.dearb.me" target="_blank">
+                    
+                        <span class="sidebar-button-desc hide-md">Dearx</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+</nav>
+            <div id="main">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+        <div class="post-header main-content-wrap">
+    
+        <h1 class="post-title" itemprop="headline">[移动端抽奖刮刮卡] Html5 Canvas 实现的可刮涂层效果</h1>
+    
+    
+</div>
+    
+    <div class="post-content markdown main-content-wrap" itemprop="articleBody">
+        <h4 id="产品背景"><a href="#产品背景" class="headerlink" title="产品背景"></a>产品背景</h4><p>其实互动活动移动化已经不再是一种未知的趋势，而是可以用数据证明的。为了让我们的用户有更完美的体验，互动活动必须延伸到移动端！  </p>
+<h4 id="创意诞生"><a href="#创意诞生" class="headerlink" title="创意诞生"></a>创意诞生</h4><p>大部分互动活动为了吸引用户都祭出了“抽奖大礼”这个杀手锏，这种方式虽然老套，但是老而弥坚。然而，这一已经非常成熟的形式，在向移动端移植的时候，我们却遇到了实际问题：  </p>
+<p>第一是实现方式。过去Flash技术开发的大转盘、老虎机之类的东东，在移动端的兼容性简直惨不忍睹，但是换做 JS 开发，又面临时间成本太高、效率太低的窘境，无法快速应对多样且善变的定制化需求。<br><a id="more"></a><br>第二是表现方式。移动端的小屏幕，无法承担过于复杂的抽奖界面设计，用户如果连内容都看不清楚，就更别提参与的热情了。  </p>
+<p><img src="http://djt.qq.com/upload/public/common/2013/04/images/27155307280.jpg" alt="Alt images" title="Optional images"></p>
+<p>那么，既要抽奖，又要兼顾移动端体验，更要兼备清晰的表现形式及创新点，我们该怎么办？  </p>
+<p>经过若干次头脑风暴和会议讨论，结合多次交互测试，一个 Good Idea 终于诞生了！ LOOK ！这就是亮闪闪的移动端互动活动抽奖刮刮卡！</p>
+<p style="text-align:center"><br><img src="http://djt.qq.com/upload/public/common/2013/04/images/27155503442.gif"><br></p>
+
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">bodyStyle</span>) </span>&#123;</div><div class="line">    bodyStyle.mozUserSelect = <span class="string">'none'</span>;</div><div class="line">    bodyStyle.webkitUserSelect = <span class="string">'none'</span>;</div><div class="line"> </div><div class="line">    <span class="keyword">var</span> img = <span class="keyword">new</span> Image();</div><div class="line">    <span class="keyword">var</span> canvas = <span class="built_in">document</span>.querySelector(<span class="string">'canvas'</span>);</div><div class="line">    canvas.style.backgroundColor=<span class="string">'transparent'</span>;</div><div class="line">    canvas.style.position = <span class="string">'absolute'</span>;</div><div class="line"> </div><div class="line">    img.addEventListener(<span class="string">'load'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> ctx;</div><div class="line">        <span class="keyword">var</span> w = img.width,</div><div class="line">            h = img.height;</div><div class="line">        <span class="keyword">var</span> offsetX = canvas.offsetLeft,</div><div class="line">            offsetY = canvas.offsetTop;</div><div class="line">        <span class="keyword">var</span> mousedown = <span class="literal">false</span>;</div><div class="line"> </div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">layer</span>(<span class="params">ctx</span>) </span>&#123;</div><div class="line">            ctx.fillStyle = <span class="string">'gray'</span>;</div><div class="line">            ctx.fillRect(<span class="number">0</span>, <span class="number">0</span>, w, h);</div><div class="line">        &#125;</div><div class="line"> </div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">eventDown</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">            e.preventDefault();</div><div class="line">            mousedown=<span class="literal">true</span>;</div><div class="line">        &#125;</div><div class="line"> </div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">eventUp</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">            e.preventDefault();</div><div class="line">            mousedown=<span class="literal">false</span>;</div><div class="line">        &#125;</div><div class="line"> </div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">eventMove</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">            e.preventDefault();</div><div class="line">            <span class="keyword">if</span>(mousedown) &#123;</div><div class="line">                <span class="keyword">if</span>(e.changedTouches)&#123;</div><div class="line">                    e=e.changedTouches[e.changedTouches.length<span class="number">-1</span>];</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">var</span> x = (e.clientX + <span class="built_in">document</span>.body.scrollLeft || e.pageX) - offsetX || <span class="number">0</span>,</div><div class="line">                    y = (e.clientY + <span class="built_in">document</span>.body.scrollTop || e.pageY) - offsetY || <span class="number">0</span>;</div><div class="line">                <span class="keyword">with</span>(ctx) &#123;</div><div class="line">                    beginPath()</div><div class="line">                    arc(x, y, <span class="number">5</span>, <span class="number">0</span>, <span class="built_in">Math</span>.PI * <span class="number">2</span>);</div><div class="line">                    fill();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"> </div><div class="line">        canvas.width=w;</div><div class="line">        canvas.height=h;</div><div class="line">        canvas.style.backgroundImage=<span class="string">'url('</span>+img.src+<span class="string">')'</span>;</div><div class="line">        ctx=canvas.getContext(<span class="string">'2d'</span>);</div><div class="line">        ctx.fillStyle=<span class="string">'transparent'</span>;</div><div class="line">        ctx.fillRect(<span class="number">0</span>, <span class="number">0</span>, w, h);</div><div class="line">        layer(ctx);</div><div class="line"> </div><div class="line">        ctx.globalCompositeOperation = <span class="string">'destination-out'</span>;</div><div class="line"> </div><div class="line">        canvas.addEventListener(<span class="string">'touchstart'</span>, eventDown);</div><div class="line">        canvas.addEventListener(<span class="string">'touchend'</span>, eventUp);</div><div class="line">        canvas.addEventListener(<span class="string">'touchmove'</span>, eventMove);</div><div class="line">        canvas.addEventListener(<span class="string">'mousedown'</span>, eventDown);</div><div class="line">        canvas.addEventListener(<span class="string">'mouseup'</span>, eventUp);</div><div class="line">        canvas.addEventListener(<span class="string">'mousemove'</span>, eventMove);</div><div class="line">    &#125;);</div><div class="line">    img.src =<span class="string">''</span>;</div><div class="line">&#125;)(<span class="built_in">document</span>.body.style);</div></pre></td></tr></table></figure>
+<p>需要判断是否刮完时用这段代码替换原代码的eventUp事件处理函数:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">e.preventDefault();</div><div class="line">mousedown = <span class="literal">false</span>;</div><div class="line"><span class="keyword">var</span> data=ctx.getImageData(<span class="number">0</span>,<span class="number">0</span>,w,h).data;</div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,j=<span class="number">0</span>;i&lt; data.length;i+=<span class="number">4</span>)&#123;</div><div class="line">    <span class="keyword">if</span>(data[i] &amp;&amp; data[i+<span class="number">1</span>] &amp;&amp; data[i+<span class="number">2</span>] &amp;&amp; data[i+<span class="number">3</span>])&#123;</div><div class="line">        j++;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">if</span>(j&lt;=w*h*<span class="number">0.1</span>)&#123;</div><div class="line">    alert(<span class="string">'ok'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这段代码中的0.1是10%的意思,在涂层的面积小于等于10%时,就弹出窗口,表示刮完了</p>
+<p>###<a href="http://lab.dearb.me/demo/scraping.html" target="_blank" rel="external">在线演示</a></p>
+<p>(部分原文摘自：<a href="http://djt.qq.com/article/view/471" target="_blank" rel="external">大讲堂</a>)</p>
+
+        
+            
+        
+    </div>
+    <div class="post-footer main-content-wrap">
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2013-10-29/sublime-text-packages-for-front-end-development/"  data-tooltip="Sublime Text 前端开发常用扩展插件推荐">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2013-09-16/ever-since-the-day-we-met/" data-tooltip="Ever Since The Day We Met">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://dearb.me/archive/2013-10-14/html5-canvas-scraping-coating-effect/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://dearb.me/archive/2013-10-14/html5-canvas-scraping-coating-effect/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://dearb.me/archive/2013-10-14/html5-canvas-scraping-coating-effect/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                <i class="fa fa-comment-o"></i>
+            </a>
+        </li>
+    </ul>
+    
+</div>
+
+
+        
+            <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+        
+    </div>
+    <div class="post-bottom-bar">
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2013-10-29/sublime-text-packages-for-front-end-development/"  data-tooltip="Sublime Text 前端开发常用扩展插件推荐">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2013-09-16/ever-since-the-day-we-met/" data-tooltip="Ever Since The Day We Met">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://dearb.me/archive/2013-10-14/html5-canvas-scraping-coating-effect/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://dearb.me/archive/2013-10-14/html5-canvas-scraping-coating-effect/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://dearb.me/archive/2013-10-14/html5-canvas-scraping-coating-effect/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                <i class="fa fa-comment-o"></i>
+            </a>
+        </li>
+    </ul>
+    
+</div>
+
+
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <div class="copyrights">
+        Copyrights &copy; 2021 BelinChung. All Rights Reserved.
+        
+    </div>
+    <div class="copyrights">
+    	Powered by <a href="http://hexo.io/" target="_blank" rel="nofollow">Hexo</a>  
+    </div>
+</footer>
+
+            </div>
+        </div>
+        <div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar.png"/>
+        
+            <h4 id="about-card-name">BelinChung</h4>
+        
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Guangzhou China
+            </h5>
+        
+    </div>
+</div>
+        <div id="cover" style="background-image:url('/assets/images/background.png');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script.min.js"></script>
+<!--SCRIPTS END-->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'dearb';
+        (function() {
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+</html>

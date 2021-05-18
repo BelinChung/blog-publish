@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="BelinChung&#39;s Blog">
+    <title>BelinChung&#39;s Blog - 通过 URL Schemes 和 Universal Links 唤起 APP 的流程设计和代码实现</title>
+    <meta name="author" content="BelinChung">
+    <meta name="description" content="“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”">
+    <link rel="icon" href="/assets/images/favicon.ico">
+    
+        <link rel="alternative" type="application/atom+xml" title="RSS" href="atom.xml">
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-44784593-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+</head>
+
+    <body>
+        <div id="blog">
+            <header id="header">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars "></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="https://dearb.me">BelinChung&#39;s Blog</a>
+    </h1>
+    
+        <a class="header-picture-link" href="/#about">
+            <img class="header-picture" src="/assets/images/avatar.png"/>
+        </a>
+    
+</header>
+            <nav id="sidebar">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.png"/>
+                
+            </a>
+            <span class="sidebar-profile-name hide-md">BelinChung</span>
+            <span class="sidebar-profile-subtitle hide-md">a F2er</span>
+        </div>
+    
+    <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc hide-md">Home</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc hide-md">Categories</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc hide-md">Archives</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc hide-md">About me</span>
+                </a>
+            </li>
+        
+    </ul>
+    
+        <div class="sidebar-description">“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”</div>
+    
+
+    <ul class="sidebar-icons">
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-github" href="https://github.com/Belinchung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-twitter" href="https://twitter.com/BelinChung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-envelope-o" href="mailto://belichung@gmail.com" target="_blank">
+                
+                </a>
+            </li>
+        
+    </ul>
+
+    <div class="links">
+        <span>Links</span>
+        <ul class="list">
+            
+                <li>
+                    
+                        <a href="https://love.dearb.me" target="_blank">
+                    
+                        <span class="sidebar-button-desc hide-md">Dearx</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+</nav>
+            <div id="main">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+        <div class="post-header main-content-wrap">
+    
+        <h1 class="post-title" itemprop="headline">通过 URL Schemes 和 Universal Links 唤起 APP 的流程设计和代码实现</h1>
+    
+    
+</div>
+    
+    <div class="post-content markdown main-content-wrap" itemprop="articleBody">
+        <h3 id="需求描述"><a href="#需求描述" class="headerlink" title="需求描述"></a>需求描述</h3><p>此类需求多出现在运营活动中，通过社交分享的 H5 页面中会有用户交互按钮。用户点击按钮后，如果本机安装了 APP，那么需要打开/跳转至该 APP 中，并在 APP 中触发对应的操作，否则进入到 APP 下载页，引导用户下载 APP，从而获取到新用户增量。</p>
+<p><img src="https://bstatic.lufeng.info/2017-12-14-QQ20171214-135910.png" alt="demo"></p>
+<a id="more"></a>
+<h3 id="以前的实现方式"><a href="#以前的实现方式" class="headerlink" title="以前的实现方式"></a>以前的实现方式</h3><p>在 iOS8 和 Android x.x 之前，前端大神们找到了一个很溜的方法来实现 <code>通过 URL Schemes 跳转 APP 后触发回调函数</code></p>
+<blockquote>
+<p>浏览器接收到 URL 请求发现未知协议，会交给系统处理，系统就能调起客户端了。我们还能趁机检查一下用户是否安装客户端：给iframe 设置一个3-5秒的 CSS3 的transition过渡动画，然后监听动画完成事件，如果用户安装了客户端，那么系统会调起，并将浏览器转入后台运行，进入后台的浏览器一般不会再执行 CSS 动画，这样，我们就能通过判断 CSS 动画执行的时长是否超过预设来判断用户是否安装某个客户端了。</p>
+</blockquote>
+<p>不过这种通过新建一个 iframe 触发 URL Schemes 的方法已经在新版 iOS 和 Android 系统中失效，只是回看下大神们奇异的脑回路。</p>
+<h3 id="现在的实现思路"><a href="#现在的实现思路" class="headerlink" title="现在的实现思路"></a>现在的实现思路</h3><p>大家在拿到这个需求的时候，肯定觉得很简单，直接在2个按钮中加上 URL Schemes 不就完事了吗 <code>URL://action?query=x</code> ？其实我们还遗漏了产品的另一个需求：如果用户没有安装 APP 需要跳转到下载页面，指引用户进行下载。</p>
+<p>但是因为我们已经无法通过 URL Schemes 判断用户是否已经安装了，自然我们也不知道何时需要将用户带到我们的下载页中。</p>
+<h5 id="1-引入中转宣传页"><a href="#1-引入中转宣传页" class="headerlink" title="1. 引入中转宣传页"></a>1. 引入中转宣传页</h5><p>我们不妨改变一下思路，为什么要先触发 URL Schemes 再跳转，而不是先去一个用户可以下载 APP 的页面，再在这个页面触发一次  URL Schemes ，顺带还可以在这个页面做一波品牌宣传。说做就做，我们先来设计下这个作为中转的宣传页：</p>
+<p><img src="https://bstatic.lufeng.info/2017-12-14-QQ20171214-133015@2x.png-w350" alt="demo"></p>
+<p>这个宣传页主要由三部分组成：上部宣传海报、中部下载按钮、下部提示文案+再次触发指引。完美~</p>
+<h5 id="2-通过-URL-Schemes-唤起-APP"><a href="#2-通过-URL-Schemes-唤起-APP" class="headerlink" title="2. 通过 URL Schemes 唤起 APP"></a>2. 通过 URL Schemes 唤起 APP</h5><p>中转宣传页除了达到宣传的作用外，还作为一个全局的跳转处理页面存在，其他活动页不需要额外的处理跳转逻辑，只需要把操作类型和参数组装成一个标准 URL 供用户点击即可。</p>
+<p>不要小看这个页面的逻辑，并非简单的触发一个 URL Schemes ，还要处理微信内置 webview 被阻止的用户提示以及后面的  Universal Links 。所以由一个页面统一的去处理这些逻辑，显然是非常必要的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 通过 URL 中的 query 参数，组装一个 Url Scheme 出来</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getUrlScheme</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> scheme = <span class="string">'app://'</span></div><div class="line">  <span class="keyword">var</span> query = parseUrlQuery()</div><div class="line">  <span class="keyword">if</span> (query.hasOwnProperty(<span class="string">'action'</span>)) &#123;</div><div class="line">    scheme += query[<span class="string">'action'</span>]</div><div class="line">    scheme += location.search</div><div class="line">    <span class="keyword">return</span> scheme  </div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">return</span> <span class="literal">null</span></div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> scheme = getUrlScheme()</div><div class="line">  <span class="comment">// 发起一个 Url Scheme 尝试跳转 APP</span></div><div class="line">  scheme &amp;&amp; <span class="built_in">window</span>.open(scheme, <span class="string">'_parent'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="3-通过-Universal-Links-唤起-iOS-APP"><a href="#3-通过-Universal-Links-唤起-iOS-APP" class="headerlink" title="3. 通过 Universal Links 唤起 iOS APP"></a>3. 通过 Universal Links 唤起 iOS APP</h5><p>理想很丰满，现实很骨感，提测的包又被打回了。URL Schemes 的方式主要有下面几个缺点：</p>
+<ul>
+<li>iOS 跳转 APP 之前有一个弹窗，需要用户二次确认</li>
+<li>iOS 未安装 APP 的用户会得到一个：无法识别的链接的 alert 提示框</li>
+<li>在第三方 APP （比如微信）这种协议被阻断掉了，完全没反应</li>
+</ul>
+<p>查查资料，iOS9 之后有一个叫 Universal Links 的东西，它的主要原理是：APP 设置好白名单域名，用户在安装好这个 APP 后，系统会根据这个域名从根目录下面的 apple-app-site-association 配置文件中获取到相关的配置信息保存在系统中。系统监听页面访问请求，如果用户从 A 页面点击链接尝试跳转到 B 页面，而 B 页面 URL 属于 Universal Links，那么这个请求将会被系统阻止并跳转到对应的 APP 内。（B 页面将不会被打开，所以配置里面的 PATH 很重要，不然用户可能永远没有机会看到你的 B 页面，除非手工输入 URL 访问）</p>
+<p>它的优点主要是：</p>
+<ul>
+<li>已安装 APP 的用户在从活动页点击按钮尝试跳转到宣传页的时候，会被系统拦截，直接跳转到 APP（就是点击“我要领取”，直接进入 APP，不会再去到宣传页了）</li>
+<li>直接访问宣传页，头部会有一个 APP 介绍 banner，可以手工触发跳转</li>
+<li>重点！重点！由于这个是系统的行为，在第三方 APP （比如微信）无法拦截这种协议的跳转</li>
+</ul>
+<p>至于如何配置  Universal Links ，我这里就不再累赘，网上应该大把的资料，推荐一篇文章给大家吧：<a href="http://www.jianshu.com/p/734c3eff8feb" target="_blank" rel="external">《iOS 9 通用链接（Universal Links）》</a></p>
+<p>那我们就再完善下代码吧~</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> scheme = getUrlScheme()</div><div class="line">  <span class="keyword">if</span> (scheme) &#123;</div><div class="line">    <span class="comment">// 如果是微信内部或者 iOS9 以上的话，就不发送 URL Shceme 请求了，直接通过 Universal Links 跳转 APP</span></div><div class="line">    <span class="keyword">if</span> (ua.isWeChat() || (ua.isiOS() &amp;&amp; ua.getiOSVersion()[<span class="number">0</span>] &gt; <span class="number">8</span>)) &#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'try to launch app with universal links'</span>)</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'launch app with url scheme'</span>)      </div><div class="line">      <span class="built_in">window</span>.open(scheme, <span class="string">'_parent'</span>);      </div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>好了，终于可以放心的推广活动了！O(∩_∩)O~~</p>
+
+        
+            
+        
+    </div>
+    <div class="post-footer main-content-wrap">
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2018-03-02/the-insurance-you-should-buy-at-your-age/"  data-tooltip="通过合理的配置家庭保险来把控未知风险">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2017-11-01/electron-screenshot-base-on-macos-screencapture/" data-tooltip="使用 macOS 的 screencapture 程序为 Electron 应用实现原生截图功能">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://dearb.me/archive/2017-12-14/redirect-to-installed-app-with-url-schemes-and-universal-links/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://dearb.me/archive/2017-12-14/redirect-to-installed-app-with-url-schemes-and-universal-links/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://dearb.me/archive/2017-12-14/redirect-to-installed-app-with-url-schemes-and-universal-links/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                <i class="fa fa-comment-o"></i>
+            </a>
+        </li>
+    </ul>
+    
+</div>
+
+
+        
+            <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+        
+    </div>
+    <div class="post-bottom-bar">
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2018-03-02/the-insurance-you-should-buy-at-your-age/"  data-tooltip="通过合理的配置家庭保险来把控未知风险">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2017-11-01/electron-screenshot-base-on-macos-screencapture/" data-tooltip="使用 macOS 的 screencapture 程序为 Electron 应用实现原生截图功能">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://dearb.me/archive/2017-12-14/redirect-to-installed-app-with-url-schemes-and-universal-links/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://dearb.me/archive/2017-12-14/redirect-to-installed-app-with-url-schemes-and-universal-links/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://dearb.me/archive/2017-12-14/redirect-to-installed-app-with-url-schemes-and-universal-links/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                <i class="fa fa-comment-o"></i>
+            </a>
+        </li>
+    </ul>
+    
+</div>
+
+
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <div class="copyrights">
+        Copyrights &copy; 2021 BelinChung. All Rights Reserved.
+        
+    </div>
+    <div class="copyrights">
+    	Powered by <a href="http://hexo.io/" target="_blank" rel="nofollow">Hexo</a>  
+    </div>
+</footer>
+
+            </div>
+        </div>
+        <div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar.png"/>
+        
+            <h4 id="about-card-name">BelinChung</h4>
+        
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Guangzhou China
+            </h5>
+        
+    </div>
+</div>
+        <div id="cover" style="background-image:url('/assets/images/background.png');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script.min.js"></script>
+<!--SCRIPTS END-->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'dearb';
+        (function() {
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+</html>

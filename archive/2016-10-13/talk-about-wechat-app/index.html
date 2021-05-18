@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="BelinChung&#39;s Blog">
+    <title>BelinChung&#39;s Blog - 通过重写一个 Demo 小项目尝鲜微信小程序以及自己的一些看法</title>
+    <meta name="author" content="BelinChung">
+    <meta name="description" content="“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”">
+    <link rel="icon" href="/assets/images/favicon.ico">
+    
+        <link rel="alternative" type="application/atom+xml" title="RSS" href="atom.xml">
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-44784593-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+</head>
+
+    <body>
+        <div id="blog">
+            <header id="header">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars "></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="https://dearb.me">BelinChung&#39;s Blog</a>
+    </h1>
+    
+        <a class="header-picture-link" href="/#about">
+            <img class="header-picture" src="/assets/images/avatar.png"/>
+        </a>
+    
+</header>
+            <nav id="sidebar">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.png"/>
+                
+            </a>
+            <span class="sidebar-profile-name hide-md">BelinChung</span>
+            <span class="sidebar-profile-subtitle hide-md">a F2er</span>
+        </div>
+    
+    <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc hide-md">Home</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc hide-md">Categories</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc hide-md">Archives</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc hide-md">About me</span>
+                </a>
+            </li>
+        
+    </ul>
+    
+        <div class="sidebar-description">“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”</div>
+    
+
+    <ul class="sidebar-icons">
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-github" href="https://github.com/Belinchung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-twitter" href="https://twitter.com/BelinChung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-envelope-o" href="mailto://belichung@gmail.com" target="_blank">
+                
+                </a>
+            </li>
+        
+    </ul>
+
+    <div class="links">
+        <span>Links</span>
+        <ul class="list">
+            
+                <li>
+                    
+                        <a href="https://love.dearb.me" target="_blank">
+                    
+                        <span class="sidebar-button-desc hide-md">Dearx</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+</nav>
+            <div id="main">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+        <div class="post-header main-content-wrap">
+    
+        <h1 class="post-title" itemprop="headline">通过重写一个 Demo 小项目尝鲜微信小程序以及自己的一些看法</h1>
+    
+    
+</div>
+    
+    <div class="post-content markdown main-content-wrap" itemprop="articleBody">
+        <p>一直对 Hybrid App 有比较浓厚的兴趣。包括几年前玩的 Phonegap/Cordova 和最近玩的 react-native，Webview 模式下的 Hybrid 在 Android 设备上显然有一些性能上的缺陷。 RN 看似不错，很多大厂也陆续把 APP 的部分模块或整个 APP 通过 RN 重写，但前途如何，不得而知，毕竟 “前会玩”。</p>
+<p>V2 上很多关于 [ Hybrid App 能否取代原生APP ] 的主题下讨论的热火朝天，不亚于 [ PHP 是否是世界上最好的语言 ] 的讨论。为什么是取代而不是共存呢？</p>
+<a id="more"></a>
+<ul>
+<li><p>米家 APP 里的小米商城</p>
+</li>
+<li><p>手机QQ 里的 QQ 空间</p>
+</li>
+<li><p>微信里的微信小程序</p>
+</li>
+</ul>
+<p>显然有些 APP 整体需要原生的稳定性和高性能，而里面的一些业务模块需要快捷开发、可维护、高可控性，如何解决这样的冲突，明显需要一个可行的 Hybrid 解决方案。甚至 APP 里某些模块 Hybrid 化后，团队有其他看法，将整个 APP Hybrid 重构，比如米家 iOS 本次更新已经整体用 RN 重写了。</p>
+<h2 id="微信小程序"><a href="#微信小程序" class="headerlink" title="微信小程序"></a>微信小程序</h2><p>你可以在这里 Checkout 源码：<a href="https://github.com/BelinChung/wxapp-hiapp" target="_blank" rel="external">BelinChung/wxapp-hiapp</a></p>
+<p>公司最近有打算做项目的微信整合方案，刚好小程序内测，花了几天写了这个小 Demo ，当做是可行性调研。总得来说，写过 RN 和 VueJS 的同学会很快的入手，很有 Virtual DOM 和 VueJS API 的味道，但是目前看起来各方面都还在完善当中，有很多坑陆陆续续微信开发团队在填补中。因为没能真机调试的原因，其实现在在开发者工具中展现不能100%在真机中跑起来，只能静观其变了。</p>
+<p>从现在来看微信小程序并不是 HTML5 应用，而是与 react-native 类似通过 JavaScript 作为描述语言堆砌内置的原生组件，按道理产出的应用应该是真正意义上的原生应用。可是目前看来，前期的版本可能还是跑在 Webview 中，希望后期迭代或者完全发布之后，能是上述所说的吧。</p>
+<h4 id="Preview"><a href="#Preview" class="headerlink" title="Preview"></a>Preview</h4><p><img src="https://raw.githubusercontent.com/BelinChung/wxapp-hiapp/master/demo/demo_v0.2.gif" alt="Preview"></p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>如果你希望获取到 HiApp 的 react-native 版本，Checkout: <a href="https://github.com/BelinChung/react-native-hiapp" target="_blank" rel="external">BelinChung/react-native-hiapp</a></p>
+<p>如果你希望获取到 HiApp 的 Phonegap/Cordova 版本，Checkout: <a href="https://github.com/BelinChung/HiApp" target="_blank" rel="external">BelinChung/HiApp</a></p>
+<p>最后，希望 HiApp 对喜欢 Hybrid App 的同学有所帮助。</p>
+
+        
+            
+        
+    </div>
+    <div class="post-footer main-content-wrap">
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2016-10-14/enable-http2-for-your-website/"  data-tooltip="通过使用 HTTP/2 提高你的网站的访问速度">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2016-08-09/upgrade-react-native-to-v0-29/" data-tooltip="升级 react-native 到 v0.29.x 后 Android 平台部分插件无法使用的问题">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://dearb.me/archive/2016-10-13/talk-about-wechat-app/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://dearb.me/archive/2016-10-13/talk-about-wechat-app/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://dearb.me/archive/2016-10-13/talk-about-wechat-app/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                <i class="fa fa-comment-o"></i>
+            </a>
+        </li>
+    </ul>
+    
+</div>
+
+
+        
+            <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+        
+    </div>
+    <div class="post-bottom-bar">
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2016-10-14/enable-http2-for-your-website/"  data-tooltip="通过使用 HTTP/2 提高你的网站的访问速度">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2016-08-09/upgrade-react-native-to-v0-29/" data-tooltip="升级 react-native 到 v0.29.x 后 Android 平台部分插件无法使用的问题">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://dearb.me/archive/2016-10-13/talk-about-wechat-app/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://dearb.me/archive/2016-10-13/talk-about-wechat-app/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://dearb.me/archive/2016-10-13/talk-about-wechat-app/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                <i class="fa fa-comment-o"></i>
+            </a>
+        </li>
+    </ul>
+    
+</div>
+
+
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <div class="copyrights">
+        Copyrights &copy; 2021 BelinChung. All Rights Reserved.
+        
+    </div>
+    <div class="copyrights">
+    	Powered by <a href="http://hexo.io/" target="_blank" rel="nofollow">Hexo</a>  
+    </div>
+</footer>
+
+            </div>
+        </div>
+        <div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar.png"/>
+        
+            <h4 id="about-card-name">BelinChung</h4>
+        
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Guangzhou China
+            </h5>
+        
+    </div>
+</div>
+        <div id="cover" style="background-image:url('/assets/images/background.png');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script.min.js"></script>
+<!--SCRIPTS END-->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'dearb';
+        (function() {
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+</html>

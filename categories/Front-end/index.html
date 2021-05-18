@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="BelinChung&#39;s Blog">
+    <title>BelinChung&#39;s Blog - category : Front-end</title>
+    <meta name="author" content="BelinChung">
+    <meta name="description" content="“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”">
+    <link rel="icon" href="/assets/images/favicon.ico">
+    
+        <link rel="alternative" type="application/atom+xml" title="RSS" href="atom.xml">
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-44784593-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+</head>
+
+    <body>
+        <div id="blog">
+            <header id="header">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars "></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="https://dearb.me">BelinChung&#39;s Blog</a>
+    </h1>
+    
+        <a class="header-picture-link" href="/#about">
+            <img class="header-picture" src="/assets/images/avatar.png"/>
+        </a>
+    
+</header>
+            <nav id="sidebar">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.png"/>
+                
+            </a>
+            <span class="sidebar-profile-name hide-md">BelinChung</span>
+            <span class="sidebar-profile-subtitle hide-md">a F2er</span>
+        </div>
+    
+    <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc hide-md">Home</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc hide-md">Categories</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc hide-md">Archives</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc hide-md">About me</span>
+                </a>
+            </li>
+        
+    </ul>
+    
+        <div class="sidebar-description">“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”</div>
+    
+
+    <ul class="sidebar-icons">
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-github" href="https://github.com/Belinchung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-twitter" href="https://twitter.com/BelinChung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-envelope-o" href="mailto://belichung@gmail.com" target="_blank">
+                
+                </a>
+            </li>
+        
+    </ul>
+
+    <div class="links">
+        <span>Links</span>
+        <ul class="list">
+            
+                <li>
+                    
+                        <a href="https://love.dearb.me" target="_blank">
+                    
+                        <span class="sidebar-button-desc hide-md">Dearx</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+</nav>
+            <div id="main">
+                
+    
+<section class="post-group main-content-wrap">
+    
+        
+        
+                <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+        
+            <div class="post-wrap">
+                <div class="post-header">
+                    <h1 class="post-title" itemprop="headline">
+                        
+                                <a class="link-unstyled" href="https://dearb.me/archive/2015-06-03/front-end-architecture-and-project-practice-part-2/">前端工程化之前端架构及项目实践（二）</a>
+                        
+                    </h1>
+                    
+                </div>
+                <div class="post-excerpt" itemprop="articleBody">
+                    
+                        <h3 id="构建工具-FIS-的使用"><a href="#构建工具-FIS-的使用" class="headerlink" title="构建工具 - FIS 的使用"></a>构建工具 - FIS 的使用</h3><p>13年下半年的时候，第一次接触前端的构建工具，那时候好像刚好在某个会议上百度宣布了 FIS 这个工具，然后就选择了 FIS （其实小部分的原因是因为有中文文档，这个习惯非常不好，我现在已经强制改掉了）。由于那时候前置知识比较欠缺，使用起来还是有点吃力的，但是基本的功能也在项目开发中起到了很大的帮助。嗯，那时候还比较菜，啥都不知道。</p>
+<p>后来来到了现在这个团队，根据公司内部已有的项目，改用了 Grunt 来作为项目的构建工具。那时候需求还比较简单，Grunt 并没有太多欠缺的地方。再后来，由我操刀对项目进行全面的重构，我再次选择了 FIS。</p>
+<p>由于前置知识的积累以及对 Grunt 的使用，再次使用 FIS 并没有遇到太多的阻碍。我想，如果你已经掌握了 Grunt，可以尝试下使用 FIS 作为某个项目的构建工具，应该会很快的清楚两者之间的差距。</p>
+<p>以下开始介绍 FIS 在我所跟的项目里的使用，并没有太基础的入门教程哦，官方的文档虽然写的烂七八糟的，但是还是可以看滴。实在不懂就可以搜索下 issue 或者加入官方基友群，900多号全国顶级互联网公司前端为你解答疑问！</p>
+                    
+                    
+                        
+                            <a href="https://dearb.me/archive/2015-06-03/front-end-architecture-and-project-practice-part-2/" class="post-excerpt_link link "><i class="fa fa-arrow-right"></i> Continue reading</a>
+                            
+                        
+                    
+                    
+                </div>
+            </div>
+            
+        </article>
+    
+        
+        
+                <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+        
+            <div class="post-wrap">
+                <div class="post-header">
+                    <h1 class="post-title" itemprop="headline">
+                        
+                                <a class="link-unstyled" href="https://dearb.me/archive/2015-06-03/front-end-architecture-and-project-practice-part-1/">前端工程化之前端架构及项目实践（一）</a>
+                        
+                    </h1>
+                    
+                </div>
+                <div class="post-excerpt" itemprop="articleBody">
+                    
+                        <p>很久以前，就在备忘录上面写好了这篇文章的大纲，希望抽个空把这个阶段前端工程化的一些心得以文字的方式记录下来，但是万事开头难，拖了很久。而且有很多东西我更提倡用面对面的交流去阐释，所以动手写这篇文章还是因为要在公司内部做一个分享会，算是先组织下语言吧。</p>
+<p>我以前写了一篇博文叫 <a href="https://dearb.me/archive/2015-01-23/design-and-development-a-web-im-system/">《Web-IM 系统的前端设计与实现》</a> 大概的说了下当时的一些前端架构的东西。第一，那篇文章写的比较少，大概说了下；第二，前端技术发展的很快，现在这个项目的前端经过重构，已经完全跟当时不一样了，所以，还是另写一篇博文来细说下自己对前端工程化的一些看法及在项目上的实践。</p>
+<p>由于本人能力有限，这篇博文也是以我目前最高水平能写出的东西，难免会有一些差错或不理想的地方，仅供大家参考，如果有任何的建议，欢迎 Email 我，一起交流！</p>
+                    
+                    
+                        
+                            <a href="https://dearb.me/archive/2015-06-03/front-end-architecture-and-project-practice-part-1/" class="post-excerpt_link link "><i class="fa fa-arrow-right"></i> Continue reading</a>
+                            
+                        
+                    
+                    
+                </div>
+            </div>
+            
+        </article>
+    
+    <div class="pagination-bar">
+    <ul class="pagination">
+        
+        
+        <li class="pagination-number">Page 1 of 1</li>
+    </ul>
+</div>
+</section>
+
+
+                <footer id="footer" class="main-content-wrap">
+    <div class="copyrights">
+        Copyrights &copy; 2021 BelinChung. All Rights Reserved.
+        
+    </div>
+    <div class="copyrights">
+    	Powered by <a href="http://hexo.io/" target="_blank" rel="nofollow">Hexo</a>  
+    </div>
+</footer>
+
+            </div>
+        </div>
+        <div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar.png"/>
+        
+            <h4 id="about-card-name">BelinChung</h4>
+        
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Guangzhou China
+            </h5>
+        
+    </div>
+</div>
+        <div id="cover" style="background-image:url('/assets/images/background.png');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script.min.js"></script>
+<!--SCRIPTS END-->
+
+
+</html>

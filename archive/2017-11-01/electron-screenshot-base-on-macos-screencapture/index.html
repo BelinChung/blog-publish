@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="BelinChung&#39;s Blog">
+    <title>BelinChung&#39;s Blog - 使用 macOS 的 screencapture 程序为 Electron 应用实现原生截图功能</title>
+    <meta name="author" content="BelinChung">
+    <meta name="description" content="“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”">
+    <link rel="icon" href="/assets/images/favicon.ico">
+    
+        <link rel="alternative" type="application/atom+xml" title="RSS" href="atom.xml">
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-44784593-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+</head>
+
+    <body>
+        <div id="blog">
+            <header id="header">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars "></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="https://dearb.me">BelinChung&#39;s Blog</a>
+    </h1>
+    
+        <a class="header-picture-link" href="/#about">
+            <img class="header-picture" src="/assets/images/avatar.png"/>
+        </a>
+    
+</header>
+            <nav id="sidebar">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.png"/>
+                
+            </a>
+            <span class="sidebar-profile-name hide-md">BelinChung</span>
+            <span class="sidebar-profile-subtitle hide-md">a F2er</span>
+        </div>
+    
+    <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc hide-md">Home</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc hide-md">Categories</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc hide-md">Archives</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc hide-md">About me</span>
+                </a>
+            </li>
+        
+    </ul>
+    
+        <div class="sidebar-description">“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”</div>
+    
+
+    <ul class="sidebar-icons">
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-github" href="https://github.com/Belinchung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-twitter" href="https://twitter.com/BelinChung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-envelope-o" href="mailto://belichung@gmail.com" target="_blank">
+                
+                </a>
+            </li>
+        
+    </ul>
+
+    <div class="links">
+        <span>Links</span>
+        <ul class="list">
+            
+                <li>
+                    
+                        <a href="https://love.dearb.me" target="_blank">
+                    
+                        <span class="sidebar-button-desc hide-md">Dearx</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+</nav>
+            <div id="main">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+        <div class="post-header main-content-wrap">
+    
+        <h1 class="post-title" itemprop="headline">使用 macOS 的 screencapture 程序为 Electron 应用实现原生截图功能</h1>
+    
+    
+</div>
+    
+    <div class="post-content markdown main-content-wrap" itemprop="articleBody">
+        <p>基于 Electron 开发即时通讯 APP，截图功能后期势必成为一个刚需的功能。Webkit 中的 <code>desktopCapture</code> API 只能截取当前窗口的画面，用户的实际需求还是需要全屏选取范围截取。如果需要一个跨平台的插件实现，可能需要使用原生开发出一个截图应用，然后再暴露给 Electron 调用。   </p>
+<p>如果你只是需要实现 macOS 平台的截图功能，那么内置的 <code>screencapture</code> 程序也许已经满足了我们的使用需求。我们先在 terminal 中查看下 <code>screencapture</code> 程序有哪些 API 提供</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">screencapture -h</div><div class="line">screencapture: illegal option -- h</div><div class="line">usage: screencapture [-icMPmwsWxSCUtoa] [files]</div><div class="line">  -c         force screen capture to go to the clipboard</div><div class="line">  -b         capture Touch Bar - non-interactive modes only</div><div class="line">  -C         capture the cursor as well as the screen. only <span class="keyword">in</span> non-interactive modes</div><div class="line">  ...</div><div class="line">  ...</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p><code>screencapture</code> 程序提供了命令行式的调用方式，我们只需要在 Electron 的主进程中使用 NodeJS 运行我们需要执行的命令就可以了。<br>二次封装有利于我们后期的维护和替换，很高兴轮子已经有人帮我们造好了：<a href="https://github.com/rogerbf/macos-screencapture" target="_blank" rel="external">rogerbf/macos-screencapture</a></p>
+<p>我们的需求希望用户截图后，截取的图片需要保存在系统的剪切板和指定的目录中。但是发现使用 <code>-c</code> 后，不能同时保存至指定的目录中，那只能曲线救国了，先保存在指定的目录中，然后使用 <code>clipboard</code> API 写入到剪切板中。</p>
+<p>假设我们通过某个入口执行起截图功能：<br><code>主进程：main.js</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">openScreenCapturer</span>(<span class="params"></span>) </span>&#123;</div><div class="line">   <span class="comment">//指定保存的目录是在 /用户目录/图片 中</span></div><div class="line">   <span class="keyword">const</span> basePath = path.join(<span class="built_in">require</span>(<span class="string">'home-path'</span>)(), <span class="string">'./Pictures/cn.lunkr.screenCapture/'</span>)</div><div class="line">   </div><div class="line">   <span class="comment">//使用当前时间作为图片名称</span></div><div class="line">   <span class="keyword">const</span> imageName = <span class="string">`lunkr-<span class="subst">$&#123;utils.parseTime(<span class="keyword">new</span> <span class="built_in">Date</span>(), <span class="string">'&#123;y&#125;&#123;m&#125;&#123;d&#125;&#123;h&#125;&#123;i&#125;&#123;s&#125;'</span>)&#125;</span>.png`</span></div><div class="line">   <span class="keyword">const</span> imagePath = basePath + imageName</div><div class="line">   <span class="keyword">const</span> exists = pathExists.sync(basePath)</div><div class="line">   </div><div class="line">   <span class="comment">//需要预先判断这个目录是否存在，不存在的话执行一次 mkdir</span></div><div class="line">   <span class="keyword">if</span>(exists) &#123;</div><div class="line">      doScreencapture(imagePath)</div><div class="line">   &#125; <span class="keyword">else</span> &#123;</div><div class="line">       <span class="keyword">try</span> &#123;</div><div class="line">           <span class="keyword">if</span>(mkdir.sync(basePath)) doScreencapture(imagePath)</div><div class="line">       &#125; <span class="keyword">catch</span> (e) &#123;</div><div class="line">           <span class="built_in">console</span>.log(e)</div><div class="line">       &#125;</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>调起系统的截图程序，然后通知渲染进程进行二次确认<br><code>主程序：main.js</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">doScreencapture</span>(<span class="params">path</span>) </span>&#123;</div><div class="line">    <span class="keyword">const</span> pArr = path.split(<span class="string">'/'</span>)</div><div class="line"></div><div class="line">    <span class="comment">//调用 screencapture，-s 强制鼠标选择模式</span></div><div class="line">    screencapture(&#123;</div><div class="line">        path: path,</div><div class="line">        options: [<span class="string">'-s'</span>]</div><div class="line">    &#125;).then(<span class="function"><span class="params">path</span> =&gt;</span> &#123;</div><div class="line">        <span class="comment">//截图成功的回调，使用 nativeImage API 从 PATH 中读取出保存的图片</span></div><div class="line">        <span class="keyword">const</span> image =  nativeImage.createFromPath(path)</div><div class="line">        </div><div class="line">        <span class="comment">//写入到剪切板</span></div><div class="line">        clipboard.writeImage(image)</div><div class="line">        </div><div class="line">        <span class="comment">//将图片读取为 dataURL 格式</span></div><div class="line">        <span class="keyword">const</span> dataURL = image.toDataURL()</div><div class="line">        </div><div class="line">        <span class="comment">//使用内置的事件系统，将 dataURL 格式的图片通知给渲染程序</span></div><div class="line">        mainWindow.webContents.send(<span class="string">'screen-captured'</span>, &#123;</div><div class="line">            dataURL,</div><div class="line">            fileName: pArr[pArr.length - <span class="number">1</span>]</div><div class="line">        &#125;)</div><div class="line">    &#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">`error: <span class="subst">$&#123;err&#125;</span>`</span>))</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>渲染程序监听到主程序的事件后，进行交互层面的用户二次确定<br><code>渲染程序：index.js</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> ipcRenderer = <span class="built_in">window</span>.Electron.ipc</div><div class="line"></div><div class="line"><span class="comment">//使用 ipc 监听主程序发送的事件</span></div><div class="line">ipcRenderer.on(<span class="string">'screen-captured'</span>, (event, message) =&gt; &#123;</div><div class="line">    <span class="comment">//将 dataUrl 的图片转换成 file 对象</span></div><div class="line">    <span class="keyword">const</span> file = dataURLtoFile(message.dataURL, message.fileName)</div><div class="line">    </div><div class="line">    <span class="comment">//弹出确认预览框</span></div><div class="line">    openScreenCaptureModal(&#123;</div><div class="line">      file,</div><div class="line">      name: message.fileName,</div><div class="line">      dataURL: message.dataURL</div><div class="line">    &#125;)</div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="comment">//额外赠送~</span></div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">dataURLtoFile</span>(<span class="params">dataurl, filename</span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> arr = dataurl.split(<span class="string">','</span>)</div><div class="line">  <span class="keyword">const</span> mime = arr[<span class="number">0</span>].match(<span class="regexp">/:(.*?);/</span>)[<span class="number">1</span>]</div><div class="line">  <span class="keyword">const</span> bstr = atob(arr[<span class="number">1</span>])</div><div class="line">  <span class="keyword">let</span> n = bstr.length</div><div class="line">  <span class="keyword">const</span> u8arr = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(n)</div><div class="line">  <span class="keyword">while</span>(n--)&#123;</div><div class="line">    u8arr[n] = bstr.charCodeAt(n)</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">new</span> File([u8arr], filename, &#123;<span class="attr">type</span>:mime&#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>大概的实现思路和核心的代码就这些啦，希望对一些朋友有所帮助<br>效果如下图所示：</p>
+<p><img src="https://bstatic.lufeng.info/mac_screencapture.gif" alt="preview"></p>
+
+        
+            
+        
+    </div>
+    <div class="post-footer main-content-wrap">
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2017-12-14/redirect-to-installed-app-with-url-schemes-and-universal-links/"  data-tooltip="通过 URL Schemes 和 Universal Links 唤起 APP 的流程设计和代码实现">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2016-10-14/enable-http2-for-your-website/" data-tooltip="通过使用 HTTP/2 提高你的网站的访问速度">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://dearb.me/archive/2017-11-01/electron-screenshot-base-on-macos-screencapture/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://dearb.me/archive/2017-11-01/electron-screenshot-base-on-macos-screencapture/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://dearb.me/archive/2017-11-01/electron-screenshot-base-on-macos-screencapture/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                <i class="fa fa-comment-o"></i>
+            </a>
+        </li>
+    </ul>
+    
+</div>
+
+
+        
+            <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+        
+    </div>
+    <div class="post-bottom-bar">
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2017-12-14/redirect-to-installed-app-with-url-schemes-and-universal-links/"  data-tooltip="通过 URL Schemes 和 Universal Links 唤起 APP 的流程设计和代码实现">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2016-10-14/enable-http2-for-your-website/" data-tooltip="通过使用 HTTP/2 提高你的网站的访问速度">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://dearb.me/archive/2017-11-01/electron-screenshot-base-on-macos-screencapture/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://dearb.me/archive/2017-11-01/electron-screenshot-base-on-macos-screencapture/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://dearb.me/archive/2017-11-01/electron-screenshot-base-on-macos-screencapture/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                <i class="fa fa-comment-o"></i>
+            </a>
+        </li>
+    </ul>
+    
+</div>
+
+
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <div class="copyrights">
+        Copyrights &copy; 2021 BelinChung. All Rights Reserved.
+        
+    </div>
+    <div class="copyrights">
+    	Powered by <a href="http://hexo.io/" target="_blank" rel="nofollow">Hexo</a>  
+    </div>
+</footer>
+
+            </div>
+        </div>
+        <div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar.png"/>
+        
+            <h4 id="about-card-name">BelinChung</h4>
+        
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Guangzhou China
+            </h5>
+        
+    </div>
+</div>
+        <div id="cover" style="background-image:url('/assets/images/background.png');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script.min.js"></script>
+<!--SCRIPTS END-->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'dearb';
+        (function() {
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+</html>

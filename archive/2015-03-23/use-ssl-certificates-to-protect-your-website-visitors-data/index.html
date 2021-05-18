@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="BelinChung&#39;s Blog">
+    <title>BelinChung&#39;s Blog - 使用 SSL 证书保护网站的访问</title>
+    <meta name="author" content="BelinChung">
+    <meta name="description" content="“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”">
+    <link rel="icon" href="/assets/images/favicon.ico">
+    
+        <link rel="alternative" type="application/atom+xml" title="RSS" href="atom.xml">
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-44784593-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+</head>
+
+    <body>
+        <div id="blog">
+            <header id="header">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars "></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="https://dearb.me">BelinChung&#39;s Blog</a>
+    </h1>
+    
+        <a class="header-picture-link" href="/#about">
+            <img class="header-picture" src="/assets/images/avatar.png"/>
+        </a>
+    
+</header>
+            <nav id="sidebar">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.png"/>
+                
+            </a>
+            <span class="sidebar-profile-name hide-md">BelinChung</span>
+            <span class="sidebar-profile-subtitle hide-md">a F2er</span>
+        </div>
+    
+    <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc hide-md">Home</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc hide-md">Categories</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc hide-md">Archives</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc hide-md">About me</span>
+                </a>
+            </li>
+        
+    </ul>
+    
+        <div class="sidebar-description">“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”</div>
+    
+
+    <ul class="sidebar-icons">
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-github" href="https://github.com/Belinchung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-twitter" href="https://twitter.com/BelinChung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-envelope-o" href="mailto://belichung@gmail.com" target="_blank">
+                
+                </a>
+            </li>
+        
+    </ul>
+
+    <div class="links">
+        <span>Links</span>
+        <ul class="list">
+            
+                <li>
+                    
+                        <a href="https://love.dearb.me" target="_blank">
+                    
+                        <span class="sidebar-button-desc hide-md">Dearx</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+</nav>
+            <div id="main">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+        <div class="post-header main-content-wrap">
+    
+        <h1 class="post-title" itemprop="headline">使用 SSL 证书保护网站的访问</h1>
+    
+    
+</div>
+    
+    <div class="post-content markdown main-content-wrap" itemprop="articleBody">
+        <p><code>[update] 本文于 2017-12-29 进行过一次修订</code></p>
+<p>我以前没有接触过 SSL ，导致签发人生中第一张 SSL 证书的时候，Private Key 是通过第三方生成的，理论上来说这张证书基本上是废了，因为你家门的钥匙都是别人帮你配的，谁知道他有没有留一个副本！所以 Private Key 一定得自己生成。   </p>
+<p>以下的内容，随随便便搜索引擎便能搜索到更加详细的，我在这里也就不累赘了，大概的说一下一些简单的东西。</p>
+<h3 id="SSL-证书有什么用"><a href="#SSL-证书有什么用" class="headerlink" title="SSL 证书有什么用"></a>SSL 证书有什么用</h3><ul>
+<li>SSL 是一个加密协议，它能保证你的数据在传输的过程中不被截取   </li>
+<li>它能保证你的网站的内容不被篡改，比如国内的各宽带运营商，强制在你的网站上加 Javascript 代码，投放广告   </li>
+<li>iOS APP 和 小程序 强制要求使用 HTTPS 传输内容 </li>
+</ul>
+<a id="more"></a>
+<h3 id="SSL-证书价格怎么样"><a href="#SSL-证书价格怎么样" class="headerlink" title="SSL 证书价格怎么样"></a>SSL 证书价格怎么样</h3><p>Let’s Encrypt 已提供免费 SSL 证书签发服务，感谢这个组织推动了整个互联网 HTTPS 化。目前，签发证书的成本其实还是蛮低的。如果你是个人使用，不防试试以下的 CA 签发的证书，如果你是商用，我觉得你应该比我更清楚应该去哪里签。</p>
+<ul>
+<li><a href="https://letsencrypt.org/" target="_blank" rel="external">Let’s Encrypt</a> 免费签单域名/多域名证书，有效期较短，3个月。</li>
+<li><a href="https://freessl.org" target="_blank" rel="external">FreeSSL</a> 一个免费提供证书申请服务的第三方网站   </li>
+<li>Comodo PositiveSSL 我在 namecheap.com 签的单域名证书，50多RMB。</li>
+<li>各大云服务运营商都提供了免费的 SSL 签发服务</li>
+</ul>
+<h3 id="SSL-证书如何申请"><a href="#SSL-证书如何申请" class="headerlink" title="SSL 证书如何申请"></a>SSL 证书如何申请</h3><p>在哪家 CA 申请证书都是差不多的流程。你需要准备的是你申请域名的 Private Key 和通过 Private Key 生成的 CSR (CERTIFICATE REQUEST)，然后将 CSR 给 CA ，CA 域名审核通过后，将会给你一个 CRT SSL 证书。CSR 起到中间传递的作用，最后部署的时候，真正有用的只有  Private Key 和 CRT  </p>
+<p>如果你觉得通过命令行生成 Private Key 和 CSR 麻烦的话，我这里推荐一个在线生成的网站，这个网站纯前端生成，无后端服务器，理论上是安全的。</p>
+<p><a href="https://ym.github.io/jscsrgen/" target="_blank" rel="external">CSR Generator</a> </p>
+<p>[！！重点！！] 记得生成之后，要点击下载 ZIP 包，里面含有 Private Key ，把它丢了就没救了。</p>
+<h3 id="SSL-证书如何部署"><a href="#SSL-证书如何部署" class="headerlink" title="SSL 证书如何部署"></a>SSL 证书如何部署</h3><p>我觉得部署倒是挺简单的，把 私钥 和 域名证书 放在服务器上，配置 Nginx Conf ，reload 完事。</p>
+<p>host.conf 相关配置</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">server</div><div class="line">&#123;</div><div class="line">    <span class="attribute">listen</span> <span class="number">443</span>;</div><div class="line">    </div><div class="line">    <span class="comment"># 其他内容 </span></div><div class="line">		</div><div class="line">    <span class="attribute">ssl</span> <span class="literal">on</span>;</div><div class="line">    <span class="attribute">ssl_certificate</span> /etc/ssl/private/ssl.crt;</div><div class="line">    <span class="attribute">ssl_certificate_key</span> /etc/ssl/private/ssl.key;</div><div class="line">    <span class="attribute">ssl_session_timeout</span> <span class="number">5m</span>;</div><div class="line">    <span class="attribute">ssl_protocols</span> TLSv1 TLSv1.<span class="number">1</span> TLSv1.<span class="number">2</span>;</div><div class="line">    <span class="attribute">ssl_ciphers</span> AESGCM:ALL:!DH:!EXPORT:!RC4:+HIGH:!MEDIUM:!LOW:!aNULL:!eNULL;</div><div class="line">    <span class="attribute">ssl_prefer_server_ciphers</span> <span class="literal">on</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>把 HTTP 强制跳转至 HTTPS</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">server</div><div class="line">&#123;</div><div class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</div><div class="line">    <span class="attribute">server_name</span>  dearb.me;</div><div class="line">    <span class="attribute">rewrite</span>  <span class="regexp"> ^</span>  https://<span class="variable">$server_name</span><span class="variable">$request_uri</span>? <span class="literal">permanent</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="SSL证书的一些小问题"><a href="#SSL证书的一些小问题" class="headerlink" title="SSL证书的一些小问题"></a>SSL证书的一些小问题</h3><ul>
+<li>Android 浏览器或某些 PC 浏览器上显示证书不受信任。你需要找到你所申请 CA 的证书及根证书等证书链，放在你的证书 <code>ssl.crt</code> 后面就OK了。<a href="https://certificatechain.io/" target="_blank" rel="external">证书链补全工具</a></li>
+<li>浏览器上面没有显示绿标，而且灰色小黄标。那是因为你的页面含有 HTTP 协议的元素，全部使用 HTTPS ，就有小绿标了</li>
+</ul>
+<p>最后你可以在 <a href="https://www.ssllabs.com/ssltest/" target="_blank" rel="external">SSL Labs</a> 检测你的域名的 SSL 评分已经在各终端的信任情况。</p>
+
+        
+            
+        
+    </div>
+    <div class="post-footer main-content-wrap">
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2015-03-28/enable-tls-sni-to-support-multiple-certificates-on-the-same-ip/"  data-tooltip="通过开启 Nginx TLS SNI 来支持同一 IP 下多 SSL 证书">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2015-01-23/design-and-development-a-web-im-system/" data-tooltip="Web-IM 系统的前端设计与实现">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://dearb.me/archive/2015-03-23/use-ssl-certificates-to-protect-your-website-visitors-data/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://dearb.me/archive/2015-03-23/use-ssl-certificates-to-protect-your-website-visitors-data/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://dearb.me/archive/2015-03-23/use-ssl-certificates-to-protect-your-website-visitors-data/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                <i class="fa fa-comment-o"></i>
+            </a>
+        </li>
+    </ul>
+    
+</div>
+
+
+        
+            <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+        
+    </div>
+    <div class="post-bottom-bar">
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2015-03-28/enable-tls-sni-to-support-multiple-certificates-on-the-same-ip/"  data-tooltip="通过开启 Nginx TLS SNI 来支持同一 IP 下多 SSL 证书">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2015-01-23/design-and-development-a-web-im-system/" data-tooltip="Web-IM 系统的前端设计与实现">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://dearb.me/archive/2015-03-23/use-ssl-certificates-to-protect-your-website-visitors-data/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://dearb.me/archive/2015-03-23/use-ssl-certificates-to-protect-your-website-visitors-data/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://dearb.me/archive/2015-03-23/use-ssl-certificates-to-protect-your-website-visitors-data/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                <i class="fa fa-comment-o"></i>
+            </a>
+        </li>
+    </ul>
+    
+</div>
+
+
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <div class="copyrights">
+        Copyrights &copy; 2021 BelinChung. All Rights Reserved.
+        
+    </div>
+    <div class="copyrights">
+    	Powered by <a href="http://hexo.io/" target="_blank" rel="nofollow">Hexo</a>  
+    </div>
+</footer>
+
+            </div>
+        </div>
+        <div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar.png"/>
+        
+            <h4 id="about-card-name">BelinChung</h4>
+        
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Guangzhou China
+            </h5>
+        
+    </div>
+</div>
+        <div id="cover" style="background-image:url('/assets/images/background.png');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script.min.js"></script>
+<!--SCRIPTS END-->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'dearb';
+        (function() {
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+</html>

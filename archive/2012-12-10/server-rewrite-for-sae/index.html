@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="BelinChung&#39;s Blog">
+    <title>BelinChung&#39;s Blog - 通过判断 $_SERVER[&#39;SERVER_NAME&#39;] 实现 SAE 三级域名分发</title>
+    <meta name="author" content="BelinChung">
+    <meta name="description" content="“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”">
+    <link rel="icon" href="/assets/images/favicon.ico">
+    
+        <link rel="alternative" type="application/atom+xml" title="RSS" href="atom.xml">
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-44784593-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+</head>
+
+    <body>
+        <div id="blog">
+            <header id="header">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars "></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="https://dearb.me">BelinChung&#39;s Blog</a>
+    </h1>
+    
+        <a class="header-picture-link" href="/#about">
+            <img class="header-picture" src="/assets/images/avatar.png"/>
+        </a>
+    
+</header>
+            <nav id="sidebar">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.png"/>
+                
+            </a>
+            <span class="sidebar-profile-name hide-md">BelinChung</span>
+            <span class="sidebar-profile-subtitle hide-md">a F2er</span>
+        </div>
+    
+    <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc hide-md">Home</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc hide-md">Categories</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc hide-md">Archives</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc hide-md">About me</span>
+                </a>
+            </li>
+        
+    </ul>
+    
+        <div class="sidebar-description">“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”</div>
+    
+
+    <ul class="sidebar-icons">
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-github" href="https://github.com/Belinchung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-twitter" href="https://twitter.com/BelinChung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-envelope-o" href="mailto://belichung@gmail.com" target="_blank">
+                
+                </a>
+            </li>
+        
+    </ul>
+
+    <div class="links">
+        <span>Links</span>
+        <ul class="list">
+            
+                <li>
+                    
+                        <a href="https://love.dearb.me" target="_blank">
+                    
+                        <span class="sidebar-button-desc hide-md">Dearx</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+</nav>
+            <div id="main">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+        <div class="post-header main-content-wrap">
+    
+        <h1 class="post-title" itemprop="headline">通过判断 $_SERVER[&#39;SERVER_NAME&#39;] 实现 SAE 三级域名分发</h1>
+    
+    
+</div>
+    
+    <div class="post-content markdown main-content-wrap" itemprop="articleBody">
+        <p>最近一直在折腾这件事，不断的去写各种各样的URL Rewrite ，都不能实现，百思不得其解</p>
+<p>你会发现，本身SAE的二级域名已经是泛域名解析了，即访问 <em>.52its.sinaapp.com 都可访问到 52its.sinaapp.com (</em> 通用匹配符)</p>
+<p>理论上SAE的二级域名完全可以实现如下效果（三级域名分发，不同的三级域名跳转到不同的子目录下面）<br><a id="more"></a></p>
+<p>这个网站的目录结构如下图所示</p>
+<p><a href="http://52its-wordpress.stor.sinaapp.com/uploads/2012/12/QQ截图20121210122706.gif" target="_blank" rel="external"><img src="http://52its-wordpress.stor.sinaapp.com/uploads/2012/12/QQ截图20121210122706-300x242.gif" alt=""></a></p>
+<p>实现的方法，我想大部分人会纠结在 怎么样写URL Rewrite 来实现三级分发跳转</p>
+<p>但是，往往事情得往简单的方面想，既然SAE的二级域名已经是泛域名解析了</p>
+<p>那为何我们不直接写一个入口文件，对 $_SERVER[‘SERVER_NAME’] 进行判断，然后再include对应的子目录呢（非常感谢<a href="http://weibo.com/clh021" target="_blank" rel="external">@良宏工作室</a> 提供思路）</p>
+<p>从代码本身来实现想要的功能，还更简单呢。</p>
+<p>具体入口文件代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span>   </div><div class="line">header(<span class="string">"Content-type: text/html; charset=utf-8"</span>);   </div><div class="line">$root_url = <span class="string">"belinlove"</span>;   </div><div class="line">$path = substr($_SERVER[<span class="string">'SERVER_NAME'</span>], <span class="number">0</span>, strpos($_SERVER[<span class="string">'SERVER_NAME'</span>], <span class="string">'.'</span>));   </div><div class="line">  </div><div class="line"><span class="comment">//分发二级（三级域名)列表(Key-Value）   </span></div><div class="line">$url_list = <span class="keyword">array</span>(   </div><div class="line">    <span class="string">'博客'</span> =&gt; <span class="string">'http://blog.belinlove.sinaapp.com'</span>,   </div><div class="line">    <span class="string">'论坛'</span> =&gt; <span class="string">'http://bbs.belinlove.sinaapp.com'</span>,   </div><div class="line">    <span class="string">'love'</span> =&gt; <span class="string">'http://love.belinlove.sinaapp.com'</span>,   </div><div class="line">    <span class="string">'life'</span> =&gt; <span class="string">'http://life.belinlove.sinaapp.com'</span>,   </div><div class="line">    );   </div><div class="line">  </div><div class="line">  </div><div class="line"><span class="keyword">if</span> ($root_url !== $path) &#123;   </div><div class="line">           </div><div class="line">    <span class="keyword">if</span>(file_exists($path.<span class="string">'/index.php'</span>) ) &#123;   </div><div class="line">                                <span class="keyword">include</span>($path.<span class="string">'/index.php'</span>);   </div><div class="line">    &#125; <span class="keyword">else</span> &#123;   </div><div class="line">        <span class="keyword">foreach</span>($url_list <span class="keyword">as</span> $key=&gt;$val)    </div><div class="line">        &#123;   </div><div class="line">                <span class="keyword">echo</span>(<span class="string">'&lt;a href="'</span>.$val.<span class="string">'"&gt;'</span>.$key.<span class="string">'&lt;/a&gt;&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;'</span>);   </div><div class="line">        &#125;   </div><div class="line">    &#125;   </div><div class="line">  </div><div class="line">         </div><div class="line">&#125; <span class="keyword">else</span> &#123;   </div><div class="line">    <span class="keyword">foreach</span> ($url_list <span class="keyword">as</span> $key =&gt; $val)    </div><div class="line">    &#123;   </div><div class="line">       <span class="keyword">echo</span> (<span class="string">'&lt;a href="'</span> . $val . <span class="string">'"&gt;'</span> . $key . <span class="string">'&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;'</span>);   </div><div class="line">    &#125;   </div><div class="line">&#125;   </div><div class="line">  </div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure></p>
+
+        
+            
+        
+    </div>
+    <div class="post-footer main-content-wrap">
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2013-08-27/how-to-deploy-octopress/"  data-tooltip="How To Deploy Octopress">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2012-10-23/wordpress-map-generator-for-sae/" data-tooltip="移植 wordpress 插件 Baidu Sitemap Generator 到 SAE(KV版)">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://dearb.me/archive/2012-12-10/server-rewrite-for-sae/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://dearb.me/archive/2012-12-10/server-rewrite-for-sae/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://dearb.me/archive/2012-12-10/server-rewrite-for-sae/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                <i class="fa fa-comment-o"></i>
+            </a>
+        </li>
+    </ul>
+    
+</div>
+
+
+        
+            <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+        
+    </div>
+    <div class="post-bottom-bar">
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2013-08-27/how-to-deploy-octopress/"  data-tooltip="How To Deploy Octopress">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2012-10-23/wordpress-map-generator-for-sae/" data-tooltip="移植 wordpress 插件 Baidu Sitemap Generator 到 SAE(KV版)">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://dearb.me/archive/2012-12-10/server-rewrite-for-sae/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://dearb.me/archive/2012-12-10/server-rewrite-for-sae/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://dearb.me/archive/2012-12-10/server-rewrite-for-sae/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                <i class="fa fa-comment-o"></i>
+            </a>
+        </li>
+    </ul>
+    
+</div>
+
+
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <div class="copyrights">
+        Copyrights &copy; 2021 BelinChung. All Rights Reserved.
+        
+    </div>
+    <div class="copyrights">
+    	Powered by <a href="http://hexo.io/" target="_blank" rel="nofollow">Hexo</a>  
+    </div>
+</footer>
+
+            </div>
+        </div>
+        <div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar.png"/>
+        
+            <h4 id="about-card-name">BelinChung</h4>
+        
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Guangzhou China
+            </h5>
+        
+    </div>
+</div>
+        <div id="cover" style="background-image:url('/assets/images/background.png');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script.min.js"></script>
+<!--SCRIPTS END-->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'dearb';
+        (function() {
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+</html>

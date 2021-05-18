@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="BelinChung&#39;s Blog">
+    <title>BelinChung&#39;s Blog - 同时使用 GitHub 和 GitCafe 托管 octopress</title>
+    <meta name="author" content="BelinChung">
+    <meta name="description" content="“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”">
+    <link rel="icon" href="/assets/images/favicon.ico">
+    
+        <link rel="alternative" type="application/atom+xml" title="RSS" href="atom.xml">
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-44784593-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+</head>
+
+    <body>
+        <div id="blog">
+            <header id="header">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars "></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="https://dearb.me">BelinChung&#39;s Blog</a>
+    </h1>
+    
+        <a class="header-picture-link" href="/#about">
+            <img class="header-picture" src="/assets/images/avatar.png"/>
+        </a>
+    
+</header>
+            <nav id="sidebar">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.png"/>
+                
+            </a>
+            <span class="sidebar-profile-name hide-md">BelinChung</span>
+            <span class="sidebar-profile-subtitle hide-md">a F2er</span>
+        </div>
+    
+    <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc hide-md">Home</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc hide-md">Categories</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc hide-md">Archives</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc hide-md">About me</span>
+                </a>
+            </li>
+        
+    </ul>
+    
+        <div class="sidebar-description">“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”</div>
+    
+
+    <ul class="sidebar-icons">
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-github" href="https://github.com/Belinchung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-twitter" href="https://twitter.com/BelinChung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-envelope-o" href="mailto://belichung@gmail.com" target="_blank">
+                
+                </a>
+            </li>
+        
+    </ul>
+
+    <div class="links">
+        <span>Links</span>
+        <ul class="list">
+            
+                <li>
+                    
+                        <a href="https://love.dearb.me" target="_blank">
+                    
+                        <span class="sidebar-button-desc hide-md">Dearx</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+</nav>
+            <div id="main">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+        <div class="post-header main-content-wrap">
+    
+        <h1 class="post-title" itemprop="headline">同时使用 GitHub 和 GitCafe 托管 octopress</h1>
+    
+    
+</div>
+    
+    <div class="post-content markdown main-content-wrap" itemprop="articleBody">
+        <p>以前这个博客是托管在 stdyun 的，后来不知道什么原因（貌似被美团云收购？), octopress 托管服务终止了，原有的网站被转移在外国的服务器上，而且访问速度越来越慢，这不得不让我考虑重新寻找一个免费的 octopress 托管服务。<br>几经斟酌，觉得选用 GitHub 和 GitCafe ，他们分别是国外的、国内的代码托管服务商，也都提供 Git Pages 服务，我们可以把 octopress 托管在他们那。</p>
+<h2 id="GitHub-Pages"><a href="#GitHub-Pages" class="headerlink" title="GitHub Pages"></a>GitHub Pages</h2><p>具体的托管操作在互联网上面大把，这里就不在累赘，大概如下</p>
+<ul>
+<li>GitHub 上面创建一个与你用户名相同前缀的 Repository ，比如我的 BelinChung/belinchung.github.io </li>
+<li><code>cd path/your/octopress/folder</code></li>
+<li>初始化 <code>rake setup_github_pages</code> ，按提示输入你的 Repository URL</li>
+<li>编译和发布 <code>rake generate</code> <code>rake deploy</code> </li>
+</ul>
+<a id="more"></a> 
+<h2 id="GitCafe-Pages"><a href="#GitCafe-Pages" class="headerlink" title="GitCafe Pages"></a>GitCafe Pages</h2><p>因为两家的产品都差不多，所以操作也是不尽相同，小区别在第一步，不需要 github.io 后缀</p>
+<ul>
+<li>GitCafe 上面创建一个与你用户名相同前缀的 Repository ，比如我的 BelinChung/belinchung  </li>
+</ul>
+<p>GitCafe 还提供的中文文档，可以去看看 <a href="https://gitcafe.com/GitCafe/Help/wiki/Pages-%E7%9B%B8%E5%85%B3%E5%B8%AE%E5%8A%A9#wiki" target="_blank" rel="external">GitCafe Pages Wiki</a></p>
+<h2 id="域名绑定"><a href="#域名绑定" class="headerlink" title="域名绑定"></a>域名绑定</h2><ul>
+<li><p>GitHub 需要在你的 octopress 的 source 目录下创建一个 CNAME 的文件，里面输入你想要绑定的域名，然后将域名 CNAME 到 yourname.github.io 上</p>
+</li>
+<li><p>GitCafe 后台可视化操作，非常方便，然后将域名 A 记录到 <code>117.79.146.98</code>  </p>
+</li>
+</ul>
+<h2 id="同时使用"><a href="#同时使用" class="headerlink" title="同时使用"></a>同时使用</h2><p>开头我们说了，两家分别是国外和国内的代码托管服务商，GitHub 对于国外的访问（我猜的）比较友好，GitCafe 对于国内的访问比较迅速（必须的呀），能不能同时使用两家的托管服务，如果访问者是国外的 IP，走 GitHub ；反之，如果是国内的 IP ，走 GitCafe ?</p>
+<p>答案是肯定是，我们使用 DNSPod 线路解析来实现“负载均衡”。</p>
+<p>如何你的域名在 DNSPod 上面有一段时间了，那么你的线路类型里面直接有 <code>国内</code> 、<code>国外</code> 两个选项，你直接将 Github CNAME 记录的线路类型选择为 <code>国外</code> , GitCafe A 记录的线路类型选择为 <code>国内</code> 即可！</p>
+<p><img src="https://bstatic.lufeng.info/QQ20140728-1@2x.png" alt="images"></p>
+<p>如果你的域名线路类型里没有 <code>国内</code> 、<code>国外</code> 选项，也不用伤心，我们可以这么做<br>我们将 Github CNAME 记录的线路类型选择为 <code>默认</code>，将 GitCafe A 记录的线路类型分别选择为 <code>电信</code> 、 <code>联通</code> 、 <code>教育网</code> </p>
+<p><img src="https://bstatic.lufeng.info/QQ20140728-2@2x.png-w700" alt="images"></p>
+<h2 id="同时部署"><a href="#同时部署" class="headerlink" title="同时部署"></a>同时部署</h2><p>应该两家的服务不属于镜像的关系，所以得分别更新部署，不过在你的 <code>Rakefile</code> 文件下添加这2行代码，即可按照平时一样只执行 <code>rake generate</code> <code>rake deploy</code> 即可</p>
+<pre><code class="ruby">cd <span class="string">"<span class="subst">#{deploy_dir}</span>"</span> <span class="keyword">do</span>
+    system <span class="string">"git add -A"</span>
+    puts <span class="string">"\n## Commiting: Site updated at <span class="subst">#{Time.now.utc}</span>"</span>
+    message = <span class="string">"Site updated at <span class="subst">#{Time.now.utc}</span>"</span>
+    system <span class="string">"git commit -m \"<span class="subst">#{message}</span>\""</span>
+    puts <span class="string">"\n## Pushing generated <span class="subst">#{deploy_dir}</span> website"</span>
+    system <span class="string">"git push origin <span class="subst">#{deploy_branch}</span>"</span>
+    puts <span class="string">"\n## Github Pages deploy complete"</span>
+    /*  增加这<span class="number">2</span>行，记得换上你的 git url *<span class="regexp">/</span>
+<span class="regexp">    system "git remote add gitcafe git@gitcafe.com:belinchung/belinchung</span>.git <span class="meta">&gt;&gt; </span>/dev/null <span class="number">2</span>&gt;&amp;<span class="number">1</span><span class="string">"</span>
+<span class="string">    system "</span>git push -u gitcafe <span class="symbol">master:</span>gitcafe-pages<span class="string">"</span>
+<span class="string">end</span>
+</code></pre>
+
+        
+            
+        
+    </div>
+    <div class="post-footer main-content-wrap">
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2015-01-23/design-and-development-a-web-im-system/"  data-tooltip="Web-IM 系统的前端设计与实现">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2014-05-24/create-and-manage-access-token-for-rest-api/" data-tooltip="REST API 中调用校验 Token 的生成与维护">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://dearb.me/archive/2014-07-28/use-github-and-gitcafe-hosting-octopress/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://dearb.me/archive/2014-07-28/use-github-and-gitcafe-hosting-octopress/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://dearb.me/archive/2014-07-28/use-github-and-gitcafe-hosting-octopress/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                <i class="fa fa-comment-o"></i>
+            </a>
+        </li>
+    </ul>
+    
+</div>
+
+
+        
+            <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+        
+    </div>
+    <div class="post-bottom-bar">
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2015-01-23/design-and-development-a-web-im-system/"  data-tooltip="Web-IM 系统的前端设计与实现">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2014-05-24/create-and-manage-access-token-for-rest-api/" data-tooltip="REST API 中调用校验 Token 的生成与维护">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://dearb.me/archive/2014-07-28/use-github-and-gitcafe-hosting-octopress/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://dearb.me/archive/2014-07-28/use-github-and-gitcafe-hosting-octopress/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://dearb.me/archive/2014-07-28/use-github-and-gitcafe-hosting-octopress/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                <i class="fa fa-comment-o"></i>
+            </a>
+        </li>
+    </ul>
+    
+</div>
+
+
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <div class="copyrights">
+        Copyrights &copy; 2021 BelinChung. All Rights Reserved.
+        
+    </div>
+    <div class="copyrights">
+    	Powered by <a href="http://hexo.io/" target="_blank" rel="nofollow">Hexo</a>  
+    </div>
+</footer>
+
+            </div>
+        </div>
+        <div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar.png"/>
+        
+            <h4 id="about-card-name">BelinChung</h4>
+        
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Guangzhou China
+            </h5>
+        
+    </div>
+</div>
+        <div id="cover" style="background-image:url('/assets/images/background.png');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script.min.js"></script>
+<!--SCRIPTS END-->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'dearb';
+        (function() {
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+</html>

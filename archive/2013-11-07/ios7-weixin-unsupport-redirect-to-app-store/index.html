@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="BelinChung&#39;s Blog">
+    <title>BelinChung&#39;s Blog - iOS 7 新版微信 URL 不支持跳转 App Store 的解决方案</title>
+    <meta name="author" content="BelinChung">
+    <meta name="description" content="“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”">
+    <link rel="icon" href="/assets/images/favicon.ico">
+    
+        <link rel="alternative" type="application/atom+xml" title="RSS" href="atom.xml">
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-44784593-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+</head>
+
+    <body>
+        <div id="blog">
+            <header id="header">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars "></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="https://dearb.me">BelinChung&#39;s Blog</a>
+    </h1>
+    
+        <a class="header-picture-link" href="/#about">
+            <img class="header-picture" src="/assets/images/avatar.png"/>
+        </a>
+    
+</header>
+            <nav id="sidebar">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.png"/>
+                
+            </a>
+            <span class="sidebar-profile-name hide-md">BelinChung</span>
+            <span class="sidebar-profile-subtitle hide-md">a F2er</span>
+        </div>
+    
+    <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc hide-md">Home</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc hide-md">Categories</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc hide-md">Archives</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc hide-md">About me</span>
+                </a>
+            </li>
+        
+    </ul>
+    
+        <div class="sidebar-description">“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”</div>
+    
+
+    <ul class="sidebar-icons">
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-github" href="https://github.com/Belinchung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-twitter" href="https://twitter.com/BelinChung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-envelope-o" href="mailto://belichung@gmail.com" target="_blank">
+                
+                </a>
+            </li>
+        
+    </ul>
+
+    <div class="links">
+        <span>Links</span>
+        <ul class="list">
+            
+                <li>
+                    
+                        <a href="https://love.dearb.me" target="_blank">
+                    
+                        <span class="sidebar-button-desc hide-md">Dearx</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+</nav>
+            <div id="main">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+        <div class="post-header main-content-wrap">
+    
+        <h1 class="post-title" itemprop="headline">iOS 7 新版微信 URL 不支持跳转 App Store 的解决方案</h1>
+    
+    
+</div>
+    
+    <div class="post-content markdown main-content-wrap" itemprop="articleBody">
+        <h3 id="发生什么了？"><a href="#发生什么了？" class="headerlink" title="发生什么了？"></a>发生什么了？</h3><p>今天早上刚到公司，就收到反馈说公司前端页面的下载按钮在 iOS 7 的微信内置浏览器里面点击无效，经过确认之后，前端代码是正常的，问题出在了微信上，然后谷歌之，原来腾讯在<em>*</em>。</p>
+<h3 id="是-BUG-还是刻意为之？"><a href="#是-BUG-还是刻意为之？" class="headerlink" title="是 BUG 还是刻意为之？"></a>是 BUG 还是刻意为之？</h3><p>最新版微信在所有开放的 webview（网页界面）里禁止了通过链接打开本地 app 或跳转到 app store，只有自家使用的 webview 能够打开 app 或跳转 app store。而且这种做法不像是 bug 所致，而是刻意为之。</p>
+<p>可能的用意：微信是一个重要的互联网入口和应用入口，但是微信为了自家利益，需要控制入口和流量，进而加强对公共帐号和第三方应用的控制，打击竞争对手<br><a id="more"></a></p>
+<h3 id="该怎么办呢？"><a href="#该怎么办呢？" class="headerlink" title="该怎么办呢？"></a>该怎么办呢？</h3><p>经过讨论之后，我们发现微信内置浏览器右上角的跳转按钮“在 Safari 中打开”可以间接的跳转 App Store ，所以最终我们的解决方案是如果是 iOS 的微信内置浏览器，点击按钮后，用弹出提示的方法来取代直接跳转。</p>
+<p>效果如下图所示：</p>
+<p><img src="https://bstatic.lufeng.info/QQ20131107164807.jpg" alt="preview"></p>
+<h3 id="前端实现"><a href="#前端实现" class="headerlink" title="前端实现"></a>前端实现</h3><p><code>index.html</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">'popweixin'</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">'tip top2bottom animate-delay-1'</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">'/static/img/wechat_appstore_popup.jpg'</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><code>app.css</code></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#popweixin</span> &#123;</div><div class="line">    <span class="attribute">width</span>:<span class="number">100%</span>;</div><div class="line">    <span class="attribute">height</span>:<span class="number">100%</span>;</div><div class="line">    <span class="attribute">overflow</span>:hidden;</div><div class="line">    <span class="attribute">position</span>:fixed;</div><div class="line">    <span class="attribute">z-index</span>:<span class="number">1000</span>;</div><div class="line">    <span class="attribute">background</span>:<span class="built_in">rgba</span>(0,0,0,.5);</div><div class="line">    <span class="attribute">top</span>:<span class="number">0</span>;</div><div class="line">    <span class="attribute">left</span>:<span class="number">0</span>;</div><div class="line">    <span class="attribute">display</span>:none;</div><div class="line">&#125;</div><div class="line"><span class="selector-id">#popweixin</span> <span class="selector-class">.tip</span> &#123;</div><div class="line">    <span class="attribute">width</span>:<span class="number">100%</span>;</div><div class="line">    <span class="attribute">background</span>:<span class="number">#fff</span>;</div><div class="line">    <span class="attribute">z-index</span>:<span class="number">1001</span>;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.top2bottom</span> &#123;</div><div class="line">    <span class="attribute">-webkit-animation</span>:top2bottom <span class="number">1.2s</span> ease;</div><div class="line">    <span class="attribute">-moz-animation</span>:top2bottom <span class="number">1.2s</span> ease;</div><div class="line">    <span class="attribute">-o-animation</span>:top2bottom <span class="number">1.2s</span> ease;</div><div class="line">    <span class="attribute">animation</span>:top2bottom <span class="number">1.2s</span> ease;</div><div class="line">    <span class="attribute">-webkit-animation-fill-mode</span>:backwards;</div><div class="line">    <span class="attribute">-moz-animation-fill-mode</span>:backwards;</div><div class="line">    <span class="attribute">-o-animation-fill-mode</span>:backwards;</div><div class="line">    <span class="attribute">animation-fill-mode</span>:backwards</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.animate-delay-1</span> &#123;</div><div class="line">    <span class="attribute">-webkit-animation-delay</span>:<span class="number">1s</span>;</div><div class="line">    <span class="attribute">-moz-animation-delay</span>:<span class="number">1s</span>;</div><div class="line">    <span class="attribute">-o-animation-delay</span>:<span class="number">1s</span>;</div><div class="line">    <span class="attribute">animation-delay</span>:<span class="number">1s</span></div><div class="line">&#125;</div><div class="line">@-<span class="keyword">webkit</span>-<span class="keyword">keyframes</span> top2bottom &#123;</div><div class="line">    0% &#123;</div><div class="line">    <span class="attribute">-webkit-transform</span>:<span class="built_in">translateY</span>(-300px);</div><div class="line">    <span class="attribute">opacity</span>:.<span class="number">6</span></div><div class="line">&#125;</div><div class="line">100% &#123;</div><div class="line">    <span class="attribute">-webkit-transform</span>:<span class="built_in">translateY</span>(0px);</div><div class="line">    <span class="attribute">opacity</span>:<span class="number">1</span></div><div class="line">&#125;</div><div class="line">&#125;@<span class="keyword">keyframes</span> top2bottom &#123;</div><div class="line">    0% &#123;</div><div class="line">    <span class="attribute">transform</span>:<span class="built_in">translateY</span>(-300px);</div><div class="line">    <span class="attribute">opacity</span>:.<span class="number">6</span></div><div class="line">&#125;</div><div class="line">100% &#123;</div><div class="line">    <span class="attribute">transform</span>:<span class="built_in">translateY</span>(0px);</div><div class="line">    <span class="attribute">opacity</span>:<span class="number">1</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>app.js</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> ua = navigator.userAgent.toLowerCase();</div><div class="line">    <span class="keyword">if</span> (<span class="regexp">/iphone|ipod/</span>.test(ua)) &#123;</div><div class="line">        <span class="keyword">if</span>(<span class="regexp">/micromessenger/</span>.test(ua))&#123;</div><div class="line">             <span class="built_in">document</span>.getElementById(<span class="string">"popweixin"</span>).style.display = <span class="string">"block"</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><p><img src="https://bstatic.lufeng.info/weixin_tip_chart.jpg" alt="qrcode"></p>
+
+        
+            
+        
+    </div>
+    <div class="post-footer main-content-wrap">
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2013-11-21/web-inspector-remote-debugger-weinre/"  data-tooltip="Web移动应用远程调试工具 Weinre">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2013-10-30/weixin-browser-user-agent/" data-tooltip="微信内置浏览器UserAgent的判断">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://dearb.me/archive/2013-11-07/ios7-weixin-unsupport-redirect-to-app-store/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://dearb.me/archive/2013-11-07/ios7-weixin-unsupport-redirect-to-app-store/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://dearb.me/archive/2013-11-07/ios7-weixin-unsupport-redirect-to-app-store/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                <i class="fa fa-comment-o"></i>
+            </a>
+        </li>
+    </ul>
+    
+</div>
+
+
+        
+            <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+        
+    </div>
+    <div class="post-bottom-bar">
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2013-11-21/web-inspector-remote-debugger-weinre/"  data-tooltip="Web移动应用远程调试工具 Weinre">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2013-10-30/weixin-browser-user-agent/" data-tooltip="微信内置浏览器UserAgent的判断">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://dearb.me/archive/2013-11-07/ios7-weixin-unsupport-redirect-to-app-store/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://dearb.me/archive/2013-11-07/ios7-weixin-unsupport-redirect-to-app-store/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://dearb.me/archive/2013-11-07/ios7-weixin-unsupport-redirect-to-app-store/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                <i class="fa fa-comment-o"></i>
+            </a>
+        </li>
+    </ul>
+    
+</div>
+
+
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <div class="copyrights">
+        Copyrights &copy; 2021 BelinChung. All Rights Reserved.
+        
+    </div>
+    <div class="copyrights">
+    	Powered by <a href="http://hexo.io/" target="_blank" rel="nofollow">Hexo</a>  
+    </div>
+</footer>
+
+            </div>
+        </div>
+        <div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar.png"/>
+        
+            <h4 id="about-card-name">BelinChung</h4>
+        
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Guangzhou China
+            </h5>
+        
+    </div>
+</div>
+        <div id="cover" style="background-image:url('/assets/images/background.png');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script.min.js"></script>
+<!--SCRIPTS END-->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'dearb';
+        (function() {
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+</html>

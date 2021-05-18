@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="BelinChung&#39;s Blog">
+    <title>BelinChung&#39;s Blog - 移植 wordpress 插件 Baidu Sitemap Generator 到 SAE(KV版)</title>
+    <meta name="author" content="BelinChung">
+    <meta name="description" content="“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”">
+    <link rel="icon" href="/assets/images/favicon.ico">
+    
+        <link rel="alternative" type="application/atom+xml" title="RSS" href="atom.xml">
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-44784593-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+</head>
+
+    <body>
+        <div id="blog">
+            <header id="header">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars "></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="https://dearb.me">BelinChung&#39;s Blog</a>
+    </h1>
+    
+        <a class="header-picture-link" href="/#about">
+            <img class="header-picture" src="/assets/images/avatar.png"/>
+        </a>
+    
+</header>
+            <nav id="sidebar">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.png"/>
+                
+            </a>
+            <span class="sidebar-profile-name hide-md">BelinChung</span>
+            <span class="sidebar-profile-subtitle hide-md">a F2er</span>
+        </div>
+    
+    <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc hide-md">Home</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc hide-md">Categories</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc hide-md">Archives</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc hide-md">About me</span>
+                </a>
+            </li>
+        
+    </ul>
+    
+        <div class="sidebar-description">“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”</div>
+    
+
+    <ul class="sidebar-icons">
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-github" href="https://github.com/Belinchung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-twitter" href="https://twitter.com/BelinChung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-envelope-o" href="mailto://belichung@gmail.com" target="_blank">
+                
+                </a>
+            </li>
+        
+    </ul>
+
+    <div class="links">
+        <span>Links</span>
+        <ul class="list">
+            
+                <li>
+                    
+                        <a href="https://love.dearb.me" target="_blank">
+                    
+                        <span class="sidebar-button-desc hide-md">Dearx</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+</nav>
+            <div id="main">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+        <div class="post-header main-content-wrap">
+    
+        <h1 class="post-title" itemprop="headline">移植 wordpress 插件 Baidu Sitemap Generator 到 SAE(KV版)</h1>
+    
+    
+</div>
+    
+    <div class="post-content markdown main-content-wrap" itemprop="articleBody">
+        <hr>
+<p><strong>Baidu Sitemap Generator For SAE（KV版） : </strong></p>
+<p>*只是简单移植，在能用的情况下不保证没有其他不足的地方</p>
+<hr>
+<h2 id="什么是-Baidu-Sitemap-Generator-？"><a href="#什么是-Baidu-Sitemap-Generator-？" class="headerlink" title="什么是 Baidu Sitemap Generator ？"></a><strong>什么是 Baidu Sitemap Generator ？</strong></h2><p>This pulgin generates a Baidu XML-Sitemap for WordPress Blog. | 生成百度 Sitemap XML、HTML 文件。就相当于网站被百度–全球最大的中文搜索引擎订阅，进而为您的网站带来潜在的流量。<br><a id="more"></a></p>
+<h2 id="为什么要移植这个插件？"><a href="#为什么要移植这个插件？" class="headerlink" title="为什么要移植这个插件？"></a>为什么要移植这个插件？</h2><p>众所周知，新浪云计算平台（SAE）是没有本地文件写入（777）权限的，这直接导致很多要动态生成文件的WP插件不能使用，只能通过移植来适应SAE的环境</p>
+<h2 id="如何解决777权限问题-？"><a href="#如何解决777权限问题-？" class="headerlink" title="如何解决777权限问题 ？"></a>如何解决777权限问题 ？</h2><p>SAE不开放777权限除了保证安全性之外，还因为其特殊的服务器架构（分布式、云计算，哎，我也是一知半解的，反正就是不能写本地），但是官方提供了很多其他的替代、解决方案（Storage、Memcache）都能解决无法写本地的问题。</p>
+<h2 id="具体有怎么样的移植思路？"><a href="#具体有怎么样的移植思路？" class="headerlink" title="具体有怎么样的移植思路？"></a>具体有怎么样的移植思路？</h2><p>首先，我们可以看 wordpress for SAE 中已经移植过来的插件 Google sitemap ，在插件源代码文件sitemap-core.php GetXmlPath()函数中，我发现定义存储路径的代码如下图所示：</p>
+<p><a href="http://ourzqu-wordpress.stor.sinaapp.com/uploads/2012/08/QQ截图20120821101943.png" target="_blank" rel="external"><img src="http://ourzqu-wordpress.stor.sinaapp.com/uploads/2012/08/QQ截图20120821101943.png" alt=""></a></p>
+<p>而且官方文档里面也有那么一句话，是值得我们注意的：</p>
+<p><strong>为最大程度降低应用移植的难度，SAE为Storage、Memcache提供了wrapper封装，分别对应”saestor://”和”saemc://”，对于大部分应用，只需要修改目录前缀即可完成代码迁移。</strong></p>
+<p>## </p>
+<h2 id="着手开始移植-Baidu-Sitemap-Generator"><a href="#着手开始移植-Baidu-Sitemap-Generator" class="headerlink" title="着手开始移植 Baidu Sitemap Generator"></a>着手开始移植<strong> Baidu Sitemap Generator</strong></h2><p><strong>①首先，我们去Wordpress 那里去把官方插件给下载回来</strong></p>
+<p>下载地址：<a href="http://wordpress.org/extend/plugins/baidu-sitemap-generator/" target="_blank" rel="external">http://wordpress.org/extend/plugins/baidu-sitemap-generator/</a></p>
+<p><strong>②把静态文件生成的路径修改为KVDB存储路径</strong></p>
+<p>打开Baidu Sitemap Generator 的核心文件baidu_sitemap.php，找到负责xml地图文件和sitemap.html静态文件写入的函数—build_baidu_sitemap()</p>
+<p>1、先修改生成xml地图文件那部分，未修改前代码如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** save XML file as sitemap_baidu.xml **/</span>  </div><div class="line">$GetHomePath = GetHomePath();   </div><div class="line">$filename = $GetHomePath.<span class="string">'sitemap_baidu.xml'</span>;   </div><div class="line"><span class="keyword">if</span>( IsFileWritable($GetHomePath) || IsFileWritable($filename) )&#123;    </div><div class="line">    file_put_contents(<span class="string">"$filename"</span>,<span class="string">"$baidu_xml"</span>);    </div><div class="line">    @chmod($filename, <span class="number">0777</span>);   </div><div class="line">    <span class="comment">/** Messages  **/</span>  </div><div class="line">    baidu_sitemap_topbarmessage(__(<span class="string">'Congratulate, Build the XML file success'</span>,<span class="string">'baidu_sitemap'</span>));   </div><div class="line">&#125;<span class="keyword">else</span>&#123;    </div><div class="line">    <span class="comment">/** Messages  **/</span>  </div><div class="line">    baidu_sitemap_topbarmessage(__(<span class="string">'Directory is not writable. please chmod your directory to 777.'</span>,<span class="string">'baidu_sitemap'</span>));   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>添加入KVDB存储路径，修改后的代码为(去掉if里面条件判断)<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** save XML file as sitemap_baidu.xml **/</span>  </div><div class="line">$GetHomePath = GetHomePath();   </div><div class="line">$filename = <span class="string">"saekv://wordpress/sitemap_baidu.xml"</span>;   </div><div class="line">    file_put_contents(<span class="string">"$filename"</span>,<span class="string">"$baidu_xml"</span>);    </div><div class="line">    @chmod($filename, <span class="number">0777</span>);   </div><div class="line"><span class="comment">/** Messages  **/</span>  </div><div class="line">baidu_sitemap_topbarmessage(__(<span class="string">'Congratulate, Build the XML file success'</span>,<span class="string">'baidu_sitemap'</span>));</div></pre></td></tr></table></figure></p>
+<p>2、再修改生成HTML地图文件那部分，跟上面的大同小异，未修改前的代码<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$GetHomePath = GetHomePath();   </div><div class="line">$filename_html = $GetHomePath.<span class="string">'sitemap.html'</span>;   </div><div class="line"><span class="keyword">if</span>( IsFileWritable($GetHomePath) || IsFileWritable($filename_html) )&#123;    </div><div class="line">    file_put_contents(<span class="string">"$filename_html"</span>,<span class="string">"$html"</span>);   </div><div class="line">    @chmod($filename_html, <span class="number">0777</span>);   </div><div class="line">    <span class="comment">/** Messages  **/</span>  </div><div class="line">    <span class="comment">/*baidu_sitemap_topbarmessage(__('Congratulate, Build the Html file success','baidu_sitemap'));*/</span>  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>修改后的代码段<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$GetHomePath = GetHomePath();   </div><div class="line">$filename_html = <span class="string">"saekv://wordpress/sitemap.html"</span>;   </div><div class="line">    file_put_contents(<span class="string">"$filename_html"</span>,<span class="string">"$html"</span>);   </div><div class="line">    @chmod($filename_html, <span class="number">0777</span>);   </div><div class="line">    <span class="comment">/** Messages  **/</span>  </div><div class="line">    <span class="comment">/*baidu_sitemap_topbarmessage(__('Congratulate, Build the Html file success','baidu_sitemap'));*/</span></div></pre></td></tr></table></figure></p>
+<hr>
+<p><strong> 后话：这样，自动生成的sitemap.html 和 sitemap.xml 在KVDB路径下面而非网站的根目录下面，有什么办法能把这2个静态文件“转移”到网站的根目录下面呢</strong><br><strong>请点击查看我的另一篇博文：</strong></p>
+<p><strong>SAE平台中把KVDB里的sitemap文件 URL重写成域名根目录下的文件</strong></p>
+
+        
+            
+        
+    </div>
+    <div class="post-footer main-content-wrap">
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2012-12-10/server-rewrite-for-sae/"  data-tooltip="通过判断 $_SERVER[&#39;SERVER_NAME&#39;] 实现 SAE 三级域名分发">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://dearb.me/archive/2012-10-23/wordpress-map-generator-for-sae/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://dearb.me/archive/2012-10-23/wordpress-map-generator-for-sae/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://dearb.me/archive/2012-10-23/wordpress-map-generator-for-sae/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                <i class="fa fa-comment-o"></i>
+            </a>
+        </li>
+    </ul>
+    
+</div>
+
+
+        
+            <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+        
+    </div>
+    <div class="post-bottom-bar">
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2012-12-10/server-rewrite-for-sae/"  data-tooltip="通过判断 $_SERVER[&#39;SERVER_NAME&#39;] 实现 SAE 三级域名分发">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://dearb.me/archive/2012-10-23/wordpress-map-generator-for-sae/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://dearb.me/archive/2012-10-23/wordpress-map-generator-for-sae/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://dearb.me/archive/2012-10-23/wordpress-map-generator-for-sae/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                <i class="fa fa-comment-o"></i>
+            </a>
+        </li>
+    </ul>
+    
+</div>
+
+
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <div class="copyrights">
+        Copyrights &copy; 2021 BelinChung. All Rights Reserved.
+        
+    </div>
+    <div class="copyrights">
+    	Powered by <a href="http://hexo.io/" target="_blank" rel="nofollow">Hexo</a>  
+    </div>
+</footer>
+
+            </div>
+        </div>
+        <div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar.png"/>
+        
+            <h4 id="about-card-name">BelinChung</h4>
+        
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Guangzhou China
+            </h5>
+        
+    </div>
+</div>
+        <div id="cover" style="background-image:url('/assets/images/background.png');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script.min.js"></script>
+<!--SCRIPTS END-->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'dearb';
+        (function() {
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+</html>

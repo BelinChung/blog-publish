@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="BelinChung&#39;s Blog">
+    <title>BelinChung&#39;s Blog - category : Hexo</title>
+    <meta name="author" content="BelinChung">
+    <meta name="description" content="“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”">
+    <link rel="icon" href="/assets/images/favicon.ico">
+    
+        <link rel="alternative" type="application/atom+xml" title="RSS" href="atom.xml">
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-44784593-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+</head>
+
+    <body>
+        <div id="blog">
+            <header id="header">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars "></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="https://dearb.me">BelinChung&#39;s Blog</a>
+    </h1>
+    
+        <a class="header-picture-link" href="/#about">
+            <img class="header-picture" src="/assets/images/avatar.png"/>
+        </a>
+    
+</header>
+            <nav id="sidebar">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.png"/>
+                
+            </a>
+            <span class="sidebar-profile-name hide-md">BelinChung</span>
+            <span class="sidebar-profile-subtitle hide-md">a F2er</span>
+        </div>
+    
+    <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc hide-md">Home</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc hide-md">Categories</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc hide-md">Archives</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc hide-md">About me</span>
+                </a>
+            </li>
+        
+    </ul>
+    
+        <div class="sidebar-description">“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”</div>
+    
+
+    <ul class="sidebar-icons">
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-github" href="https://github.com/Belinchung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-twitter" href="https://twitter.com/BelinChung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-envelope-o" href="mailto://belichung@gmail.com" target="_blank">
+                
+                </a>
+            </li>
+        
+    </ul>
+
+    <div class="links">
+        <span>Links</span>
+        <ul class="list">
+            
+                <li>
+                    
+                        <a href="https://love.dearb.me" target="_blank">
+                    
+                        <span class="sidebar-button-desc hide-md">Dearx</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+</nav>
+            <div id="main">
+                
+    
+<section class="post-group main-content-wrap">
+    
+        
+        
+                <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+        
+            <div class="post-wrap">
+                <div class="post-header">
+                    <h1 class="post-title" itemprop="headline">
+                        
+                                <a class="link-unstyled" href="https://dearb.me/archive/2015-05-17/transfer-comments-from-duoshuo-to-disqus/">从多说迁移博客评论至 Disqus</a>
+                        
+                    </h1>
+                    
+                </div>
+                <div class="post-excerpt" itemprop="articleBody">
+                    
+                        <p>按理来说，应该是一个很简单的过程。从多说导出标准的备份文件，导入 Disqus，就完事了。但是我就整整的折腾了几天，评论是导入进去了，但是在博文页面始终没有把原来的评论显示出来。今天下午，甚至向 Disqus 官方发送了求救邮件。</p>
+<p>就在刚才，才发现原来 Disqus 是根据文章的 URL 作为 Primary Key 的，而我新的博客系统的文章 URL 结尾比原来的少了个 <code>/</code>。擦，就是这一个字符，导致没有把原先的评论显示出来</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Old: http://example.com/article</div><div class="line">New: http://example.com/article/</div></pre></td></tr></table></figure>
+<h3 id="导入的具体过程"><a href="#导入的具体过程" class="headerlink" title="导入的具体过程"></a>导入的具体过程</h3><p>首先，在多说的后台将评论（包括文章）导出为一个 <code>export.json</code> 文件。这个文件格式是不被 Disqus 认的，所以我们得把它转换成 wordpress 导出的文件格式</p>
+                    
+                    
+                        
+                            <a href="https://dearb.me/archive/2015-05-17/transfer-comments-from-duoshuo-to-disqus/" class="post-excerpt_link link "><i class="fa fa-arrow-right"></i> Continue reading</a>
+                            
+                        
+                    
+                    
+                </div>
+            </div>
+            
+        </article>
+    
+        
+        
+                <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+        
+            <div class="post-wrap">
+                <div class="post-header">
+                    <h1 class="post-title" itemprop="headline">
+                        
+                                <a class="link-unstyled" href="https://dearb.me/archive/2015-05-10/use-hexo-build-your-own-blog/">使用 Hexo 搭建自己的博客，抛弃 Octopress</a>
+                        
+                    </h1>
+                    
+                </div>
+                <div class="post-excerpt" itemprop="articleBody">
+                    
+                        <p>很久以前，写了一篇博文 <a href="https://dearb.me/archive/2013-08-27/how-to-deploy-octopress/">How To Deploy Octopress</a> , 介绍了如何使用 Octopress 搭建一个高B格的博客系统。   </p>
+<p>可能是因为不熟悉 Ruby 的原因，自己修改好的博客主题（没有备份）在前几天因为 rake 命令无法运行的情况下，不小心清空了。本来想着重新写一遍的，但是越写越不顺手，就开始寻找一款新的博客系统。   </p>
+<p>后来找到了 Hexo ，作为一个前端，看到是基于 Node.js 写的，当然是无法抗拒的，所以果断的开始折腾 Hexo。 </p>
+<p>文章最后面，可以下载到这个博客现在所使用的 Hexo 主题，如果你喜好的话。  </p>
+<h3 id="如何搭建"><a href="#如何搭建" class="headerlink" title="如何搭建"></a>如何搭建</h3><p>不想再累赘当中细节，愿意折腾的 Hexo 和 Octopress 的人，应该看文档基本就搞定了。而且因为是基于 Node.js , 不像 Octopress 在 Windows 平台下面会遇到一些不知所以然的问题。Hexo 明显容易很多，编译速度也快非常多。  </p>
+<p>因为 Hexo 的作者是台湾人，还提供了简体中文的文档，多贴心，看不懂英文不能再成为你不动脑筋的借口了。</p>
+                    
+                    
+                        
+                            <a href="https://dearb.me/archive/2015-05-10/use-hexo-build-your-own-blog/" class="post-excerpt_link link "><i class="fa fa-arrow-right"></i> Continue reading</a>
+                            
+                        
+                    
+                    
+                </div>
+            </div>
+            
+        </article>
+    
+    <div class="pagination-bar">
+    <ul class="pagination">
+        
+        
+        <li class="pagination-number">Page 1 of 1</li>
+    </ul>
+</div>
+</section>
+
+
+                <footer id="footer" class="main-content-wrap">
+    <div class="copyrights">
+        Copyrights &copy; 2021 BelinChung. All Rights Reserved.
+        
+    </div>
+    <div class="copyrights">
+    	Powered by <a href="http://hexo.io/" target="_blank" rel="nofollow">Hexo</a>  
+    </div>
+</footer>
+
+            </div>
+        </div>
+        <div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar.png"/>
+        
+            <h4 id="about-card-name">BelinChung</h4>
+        
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Guangzhou China
+            </h5>
+        
+    </div>
+</div>
+        <div id="cover" style="background-image:url('/assets/images/background.png');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script.min.js"></script>
+<!--SCRIPTS END-->
+
+
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="BelinChung&#39;s Blog">
+    <title>BelinChung&#39;s Blog - Web-IM 系统的前端设计与实现</title>
+    <meta name="author" content="BelinChung">
+    <meta name="description" content="“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”">
+    <link rel="icon" href="/assets/images/favicon.ico">
+    
+        <link rel="alternative" type="application/atom+xml" title="RSS" href="atom.xml">
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-44784593-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+</head>
+
+    <body>
+        <div id="blog">
+            <header id="header">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars "></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="https://dearb.me">BelinChung&#39;s Blog</a>
+    </h1>
+    
+        <a class="header-picture-link" href="/#about">
+            <img class="header-picture" src="/assets/images/avatar.png"/>
+        </a>
+    
+</header>
+            <nav id="sidebar">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.png"/>
+                
+            </a>
+            <span class="sidebar-profile-name hide-md">BelinChung</span>
+            <span class="sidebar-profile-subtitle hide-md">a F2er</span>
+        </div>
+    
+    <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc hide-md">Home</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc hide-md">Categories</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc hide-md">Archives</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc hide-md">About me</span>
+                </a>
+            </li>
+        
+    </ul>
+    
+        <div class="sidebar-description">“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”</div>
+    
+
+    <ul class="sidebar-icons">
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-github" href="https://github.com/Belinchung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-twitter" href="https://twitter.com/BelinChung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-envelope-o" href="mailto://belichung@gmail.com" target="_blank">
+                
+                </a>
+            </li>
+        
+    </ul>
+
+    <div class="links">
+        <span>Links</span>
+        <ul class="list">
+            
+                <li>
+                    
+                        <a href="https://love.dearb.me" target="_blank">
+                    
+                        <span class="sidebar-button-desc hide-md">Dearx</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+</nav>
+            <div id="main">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+        <div class="post-header main-content-wrap">
+    
+        <h1 class="post-title" itemprop="headline">Web-IM 系统的前端设计与实现</h1>
+    
+    
+</div>
+    
+    <div class="post-content markdown main-content-wrap" itemprop="articleBody">
+        <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>从14年3月份入职之后，就一直在跟公司的一个即时 IM 的 Web APP 。15年已经来了，博客还没有一篇更新，就来聊聊在做这个 APP 的时候遇到的一些坑和一些总结吧。由于刚开始经验有限，所以在系统设计方面有很多的缺陷和不足，随着知识的积累，通过不断调整项目目录和一些规范，最终变成了下面的前端模型。</p>
+<h3 id="设计理念"><a href="#设计理念" class="headerlink" title="设计理念"></a>设计理念</h3><p>期间重构时受到 <a href="http://www.dropbox.com/s/4d82npjuvenvkwx/UC%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5.pdf?dl=0" target="_blank" rel="external">UC前端工程实践.pdf</a> <code>模块化开发</code> 开发思想的影响，我们也在 APP 中引入了 <code>模块化</code> 的概念。正如里面所说：我们希望能像搭积木一样开发和维护系统，最终通过组装模块得到一个完整的应用。</p>
+<ul>
+<li>模块是可组合、可分解和更换的单元</li>
+<li>模块具有一定的独立性</li>
+<li>将模块所需的js、css、图片、模板维护在一起 ( 我们未采用 )</li>
+<li>组件生态，同团队不同项目之间能有可复用的模块</li>
+</ul>
+<a id="more"></a>
+<h3 id="技术选型"><a href="#技术选型" class="headerlink" title="技术选型"></a>技术选型</h3><h4 id="前端构建工具：F-I-S"><a href="#前端构建工具：F-I-S" class="headerlink" title="前端构建工具：F.I.S"></a>前端构建工具：<a href="http://fis.baidu.com" target="_blank" rel="external">F.I.S</a></h4><p>我们在 FIS 和 Grunt 之间选择了后者 - 国产的 FIS  ，基于如下的考虑：Grunt 是一个基于 task 的构建工具，依赖众多的插件进行配置组织，可以解决基本的前端自动化问题。FIS 是基于工具、开发框架、本地开发环境为一体的前端解决方案，不但拥有各类工具插件，同时还针对 PC、Mobile、I18n 等业务、场景总结了很多最佳实践。简单来说就是 FIS 更适合大型工程化的项目。</p>
+<h4 id="模块加载器：RequireJS"><a href="#模块加载器：RequireJS" class="headerlink" title="模块加载器：RequireJS"></a>模块加载器：<a href="http://requirejs.org" target="_blank" rel="external">RequireJS</a></h4><p>通过 <a href="http://github.com/fex-team/fis-postprocessor-amd" target="_blank" rel="external">fis-postprocessor-amd</a> 的支持，FIS 能很好的支持 amd ，完全满足 amdjs 规范。至于选择哪个模块加载器，似乎也不是特别重要。</p>
+<h4 id="动态样式语言：Less"><a href="#动态样式语言：Less" class="headerlink" title="动态样式语言：Less"></a>动态样式语言：<a href="http://lesscss.org" target="_blank" rel="external">Less</a></h4><p>没啥好说的，你喜欢 less 就用 less ，喜欢 Sass ，就用 Sass 。</p>
+<h4 id="MV-框架：Vue-js"><a href="#MV-框架：Vue-js" class="headerlink" title="MV* 框架：Vue.js"></a>MV* 框架：<a href="http://vuejs.org" target="_blank" rel="external">Vue.js</a></h4><p>我们觉得 MV* 框架的选择非常重要，这关系着项目开发进度和后期维护。前端的轮子很多，我们不是大厂，没有实力也没有必要自己去造一个。一开始的提议是选用 Angular ，但是考虑到 Angular 的入门门槛，后期维护难度会加大，我们最终选择了 Vue.js （未考虑 IE 8- 的兼容）。</p>
+<p>主要原因大概是：Vue.js 更灵活，允许你按照自己的方式来架构你的程序，而不是所有事情都必须按照 Angular 的方式运行；Vue.js 比 Angular 简单的多，所以你可以在很快的时间内学到它所有的东西然后变得更有效率。<br>由于 Vue.js 关注点在 MVVM 模式的 ViewModel 层，所有还需要额外的第三方库进行支持。</p>
+<p>vue-router:  <a href="http://github.com/flatiron/director" target="_blank" rel="external">flatiron/director</a><br>vue-resource: jQuery Ajax</p>
+<h3 id="开发目录"><a href="#开发目录" class="headerlink" title="开发目录"></a>开发目录</h3><p>并不是所有的项目都适合下面的开发目录。不同的开发模式、协作、打包策略都会影响都会影响开发目录的结构，其实没必要纠结哪种开发目录更美观、更合理。还是根据实际的需求不断的调整，直至它更适合你们团队、项目。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">Project</div><div class="line">  |-- i18n</div><div class="line">      |-- index.js</div><div class="line">      |-- index-zh_CN.js</div><div class="line">  |-- script</div><div class="line">      |-- util</div><div class="line">      |-- module</div><div class="line">          |-- home</div><div class="line">              |-- index.js</div><div class="line">              |-- service.js</div><div class="line">      |-- main.js</div><div class="line">  |-- style</div><div class="line">      |-- common</div><div class="line">      |-- widget</div><div class="line">          |-- dialog</div><div class="line">              |-- index.less</div><div class="line">              |-- index-red.less</div><div class="line">      |-- module</div><div class="line">          |-- home</div><div class="line">              |-- index.less</div><div class="line">              |-- index-red.less</div><div class="line">      |-- index.less</div><div class="line">      |-- index-red.less</div><div class="line">  |-- template</div><div class="line">      |-- widget</div><div class="line">          |-- dialog.tpl.html</div><div class="line">      |-- module</div><div class="line">          |-- home.tpl.html</div><div class="line">      |-- index.tpl.html</div><div class="line">  |-- vendors</div><div class="line">	  |-- jquery</div><div class="line">		  |-- jquery.js</div><div class="line">  |-- index.html</div><div class="line">  |-- fis-conf.js</div></pre></td></tr></table></figure>
+<p>子目录基本上是按照结构、样式和脚本来划分。细化到各个子目录，基本上是按照模块来划分,关于结构，也就是模板，可能很多时候一个模块的模板可以将其融合在一个文件中，所以就没有单独建立一个目录，如果一个模块的结构比较复杂，可以像脚本和样式那样来建立相应的模块目录。各个模块会有相关的主题外观。</p>
+<h4 id="开发一个组件"><a href="#开发一个组件" class="headerlink" title="开发一个组件"></a>开发一个组件</h4><p>Vue.js 允许你把扩展的 Vue 子类当曾一个可重用的组件，概念上和 web 组件一样，但是不需要任何填充。为了创建一个组件，只需要使用 Vue.extend() 来创建一个子类的构造函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//script/main.js</span></div><div class="line"></div><div class="line"><span class="keyword">new</span> Vue(&#123;</div><div class="line">  el: <span class="string">'body'</span>,</div><div class="line">  data: &#123;</div><div class="line">    currentView: <span class="string">'home'</span></div><div class="line">  &#125;,</div><div class="line">  components: &#123;</div><div class="line">    login-component: <span class="built_in">require</span>(<span class="string">'login/index'</span>), </div><div class="line">    home-component: <span class="built_in">require</span>(<span class="string">'home/index'</span>),</div><div class="line">    archive-component: <span class="built_in">require</span>(<span class="string">'archive/index'</span>)</div><div class="line">  &#125;</div><div class="line">&#125;)</div><div class="line"><span class="string">``</span><span class="string">` </span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">`</span><span class="string">``</span> javascript</div><div class="line"><span class="comment">//script/moudle/login/index.js</span></div><div class="line"></div><div class="line">define(<span class="function"><span class="keyword">function</span>(<span class="params">require,exports,module</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> Vue = <span class="built_in">require</span>(<span class="string">'Vue'</span>);</div><div class="line">    <span class="keyword">var</span> store = <span class="built_in">require</span>(<span class="string">'services/store'</span>);</div><div class="line">    <span class="keyword">var</span> service = <span class="built_in">require</span>(<span class="string">'login/service'</span>);</div><div class="line"></div><div class="line">    <span class="built_in">module</span>.exports = &#123;</div><div class="line">        replace: <span class="literal">true</span>,</div><div class="line">        template: __inline(<span class="string">'login.tpl.html'</span>),</div><div class="line">        data: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">return</span> &#123;</div><div class="line">                email: <span class="string">''</span>,</div><div class="line">                password: <span class="string">''</span>,</div><div class="line">                errorTip: <span class="literal">null</span></div><div class="line">            &#125;</div><div class="line">        &#125;,</div><div class="line">        filters: &#123;</div><div class="line">            emailValidator: &#123;</div><div class="line">                write: <span class="function"><span class="keyword">function</span> (<span class="params">val</span>) </span>&#123;</div><div class="line">                    <span class="keyword">this</span>.errorTip = (appFunc.isEmail(val)) ? <span class="literal">null</span> : <span class="string">'邮箱必须是Email'</span>;</div><div class="line">                    <span class="keyword">return</span> val</div><div class="line">                &#125;</div><div class="line">            &#125;,</div><div class="line">            pwdValidator: &#123;</div><div class="line">                write: <span class="function"><span class="keyword">function</span> (<span class="params">val</span>) </span>&#123;</div><div class="line">                    <span class="keyword">this</span>.errorTip = (appFunc.isPasswd(val)) ? <span class="literal">null</span> : <span class="string">'密码在6-18位之间'</span>;</div><div class="line">                    <span class="keyword">return</span> val</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;,</div><div class="line">        methods: &#123;</div><div class="line">            loginSubmit: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">                <span class="keyword">var</span> data = &#123;</div><div class="line">                    email : <span class="keyword">this</span>.email,</div><div class="line">                    password: <span class="keyword">this</span>.password</div><div class="line">                &#125;;</div><div class="line">                <span class="keyword">if</span>(!<span class="keyword">this</span>.errorTip &amp; data.email !== <span class="string">''</span> &amp;&amp; data.password !== <span class="string">''</span>) &#123;</div><div class="line">                    service.login(data, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</div><div class="line">                        <span class="keyword">if</span>(res.result)&#123;</div><div class="line">                            store.setCurrentUser(res.message.sid, res.message.user);</div><div class="line">                            appRouter.setRoute(<span class="string">'index'</span>);</div><div class="line">                        &#125;</div><div class="line">                    &#125;);</div><div class="line"></div><div class="line">                &#125;<span class="keyword">else</span>&#123;</div><div class="line">                    <span class="keyword">this</span>.errorTip = <span class="string">'请输入正确的账号、密码'</span></div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h4 id="打包部署"><a href="#打包部署" class="headerlink" title="打包部署"></a>打包部署</h4><p>通过配置 FIS  的，我们能对产出的代码进行 <code>资源压缩</code>  <code>添加文件版本</code>  <code>资源合并</code>  <code>添加CDN域名</code>  <code>应用打包</code> , 其中 <code>应用打包</code> 比较蛋疼，我还在研究如何配置才能达到我最终想要的打包效果。</p>
+<p>项目通过 <code>git hook</code> 进行部署和更新。通过生产服务器上的 FIS 对仓库源码进行编译，编译目标指向 APP 目录。</p>
+<h4 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h4><p>虽然标题上写着 设计和实现 ，但是本文基本上还是介绍系统的设计为主。希望有时间能写下 Web-IM 的一些实现，主要是 IM 这块比较有意思。</p>
+<p>因为前端的数据和界面都通过 WebSocket 主动通知来进行更新，为了减少模块间的耦合，我们还引入了一套基于事件的模块间的消息传递的组件。而且，因为 Vue.js 拥有数据双向绑定的能力，处理起频繁更新的 VM 层还是相当便捷的。</p>
+<p>大概就写到这里了，想到了就写下来，不然过几天又忘了。</p>
+
+        
+            
+        
+    </div>
+    <div class="post-footer main-content-wrap">
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2015-03-23/use-ssl-certificates-to-protect-your-website-visitors-data/"  data-tooltip="使用 SSL 证书保护网站的访问">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2014-07-28/use-github-and-gitcafe-hosting-octopress/" data-tooltip="同时使用 GitHub 和 GitCafe 托管 octopress">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://dearb.me/archive/2015-01-23/design-and-development-a-web-im-system/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://dearb.me/archive/2015-01-23/design-and-development-a-web-im-system/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://dearb.me/archive/2015-01-23/design-and-development-a-web-im-system/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                <i class="fa fa-comment-o"></i>
+            </a>
+        </li>
+    </ul>
+    
+</div>
+
+
+        
+            <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+        
+    </div>
+    <div class="post-bottom-bar">
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2015-03-23/use-ssl-certificates-to-protect-your-website-visitors-data/"  data-tooltip="使用 SSL 证书保护网站的访问">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2014-07-28/use-github-and-gitcafe-hosting-octopress/" data-tooltip="同时使用 GitHub 和 GitCafe 托管 octopress">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://dearb.me/archive/2015-01-23/design-and-development-a-web-im-system/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://dearb.me/archive/2015-01-23/design-and-development-a-web-im-system/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://dearb.me/archive/2015-01-23/design-and-development-a-web-im-system/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                <i class="fa fa-comment-o"></i>
+            </a>
+        </li>
+    </ul>
+    
+</div>
+
+
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <div class="copyrights">
+        Copyrights &copy; 2021 BelinChung. All Rights Reserved.
+        
+    </div>
+    <div class="copyrights">
+    	Powered by <a href="http://hexo.io/" target="_blank" rel="nofollow">Hexo</a>  
+    </div>
+</footer>
+
+            </div>
+        </div>
+        <div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar.png"/>
+        
+            <h4 id="about-card-name">BelinChung</h4>
+        
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Guangzhou China
+            </h5>
+        
+    </div>
+</div>
+        <div id="cover" style="background-image:url('/assets/images/background.png');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script.min.js"></script>
+<!--SCRIPTS END-->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'dearb';
+        (function() {
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+</html>

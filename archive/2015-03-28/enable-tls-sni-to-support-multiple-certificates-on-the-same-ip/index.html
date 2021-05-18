@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="BelinChung&#39;s Blog">
+    <title>BelinChung&#39;s Blog - 通过开启 Nginx TLS SNI 来支持同一 IP 下多 SSL 证书</title>
+    <meta name="author" content="BelinChung">
+    <meta name="description" content="“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”">
+    <link rel="icon" href="/assets/images/favicon.ico">
+    
+        <link rel="alternative" type="application/atom+xml" title="RSS" href="atom.xml">
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-44784593-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+</head>
+
+    <body>
+        <div id="blog">
+            <header id="header">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars "></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="https://dearb.me">BelinChung&#39;s Blog</a>
+    </h1>
+    
+        <a class="header-picture-link" href="/#about">
+            <img class="header-picture" src="/assets/images/avatar.png"/>
+        </a>
+    
+</header>
+            <nav id="sidebar">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.png"/>
+                
+            </a>
+            <span class="sidebar-profile-name hide-md">BelinChung</span>
+            <span class="sidebar-profile-subtitle hide-md">a F2er</span>
+        </div>
+    
+    <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc hide-md">Home</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc hide-md">Categories</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc hide-md">Archives</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc hide-md">About me</span>
+                </a>
+            </li>
+        
+    </ul>
+    
+        <div class="sidebar-description">“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”</div>
+    
+
+    <ul class="sidebar-icons">
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-github" href="https://github.com/Belinchung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-twitter" href="https://twitter.com/BelinChung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-envelope-o" href="mailto://belichung@gmail.com" target="_blank">
+                
+                </a>
+            </li>
+        
+    </ul>
+
+    <div class="links">
+        <span>Links</span>
+        <ul class="list">
+            
+                <li>
+                    
+                        <a href="https://love.dearb.me" target="_blank">
+                    
+                        <span class="sidebar-button-desc hide-md">Dearx</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+</nav>
+            <div id="main">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+        <div class="post-header main-content-wrap">
+    
+        <h1 class="post-title" itemprop="headline">通过开启 Nginx TLS SNI 来支持同一 IP 下多 SSL 证书</h1>
+    
+    
+</div>
+    
+    <div class="post-content markdown main-content-wrap" itemprop="articleBody">
+        <p>前几天说给博客部署 SSL 证书来提高逼格，后来因为自己一个项目的需要，也跟着申请了多了一张 SSL 证书，按照相同的流程部署上去后，发现前面的域名的证书都 load 到了新增加的那张证书。接着 Google 了下，原来是 Nginx 编译的时候没有开启 TLS SNI ，这样就导致了同一 IP 下只能支持一张证书。</p>
+<h3 id="查看已安装的-Nginx-是否开启-TLS-SNI"><a href="#查看已安装的-Nginx-是否开启-TLS-SNI" class="headerlink" title="查看已安装的 Nginx 是否开启 TLS SNI"></a>查看已安装的 Nginx 是否开启 TLS SNI</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ nginx -V</div><div class="line">ginx version: nginx/1.6.2</div><div class="line">built by gcc 4.1.2 20080704 (Red Hat 4.1.2-55)</div><div class="line">TLS SNI support disabled</div><div class="line">configure arguments: --user=www --group=www --prefix=/usr/<span class="built_in">local</span>/nginx --with-http_stub_status_module --with-http_ssl_module --with-http_gzip_static_module</div></pre></td></tr></table></figure>
+<p><code>TLS SNI support disabled</code> 即未开启</p>
+<a id="more"></a>
+<h3 id="下载支持-SNI-的-OpenSSL"><a href="#下载支持-SNI-的-OpenSSL" class="headerlink" title="下载支持 SNI 的 OpenSSL"></a>下载支持 SNI 的 OpenSSL</h3><p>重新编译 Nginx 需要 OpenSSL，下载并解压到某个目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> ~</div><div class="line">$ wget http://www.openssl.org/<span class="built_in">source</span>/openssl-1.0.2a.tar.gz  </div><div class="line">$ tar zxvf openssl-1.0.2a.tar.gz</div></pre></td></tr></table></figure>
+<h3 id="重新编译-Nginx"><a href="#重新编译-Nginx" class="headerlink" title="重新编译 Nginx"></a>重新编译 Nginx</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> nginx-1.6.2 <span class="comment">#这里假设你已经下载比解压了nginx的源码</span></div><div class="line">$ ./configure --user=www --group=www \</div><div class="line">	           --prefix=/usr/<span class="built_in">local</span>/nginx \</div><div class="line">	           --with-http_stub_status_module \</div><div class="line">	           --with-http_ssl_module \</div><div class="line">	           --with-http_gzip_static_module \</div><div class="line">	           --with-openssl=path/to/openssl-1.0.2a</div><div class="line">$ make</div><div class="line">$ mv /usr/<span class="built_in">local</span>/nginx/sbin/nginx /usr/<span class="built_in">local</span>/nginx/sbin/nginx.old <span class="comment">#备份旧的nginx</span></div><div class="line">$ cp objs/nginx /usr/<span class="built_in">local</span>/nginx/sbin/nginx <span class="comment">#替换编译好的nginx</span></div></pre></td></tr></table></figure>
+<p>make 的编译选项加上 <code>--with-openssl=path/to/openssl-1.0.2a</code> 参数指向的是你解压的 OpenSSL 目录，make 编译完成后不要执行 make install ，直接将 objs 目录下编译好的新 nginx 执行文件 copy 到原来的路径下替换即可。</p>
+<h3 id="确认已经开启-TLS-SNI"><a href="#确认已经开启-TLS-SNI" class="headerlink" title="确认已经开启 TLS SNI"></a>确认已经开启 TLS SNI</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ nginx -V</div><div class="line">ginx version: nginx/1.6.2</div><div class="line">built by gcc 4.1.2 20080704 (Red Hat 4.1.2-55)</div><div class="line">TLS SNI support enabled</div><div class="line">configure arguments: --user=www --group=www --prefix=/usr/<span class="built_in">local</span>/nginx --with-http_stub_status_module --with-http_ssl_modul --with-openssl=../../openssl-1.0.2a</div></pre></td></tr></table></figure>
+<p>虽然是很简单的一件事，其实我折腾了好久，我一直以为是我 conf 文件哪里写错了，后来误打误撞发现原来是跟没有开启某些相关，希望能帮助大家少走不必要的路。</p>
+
+        
+            
+        
+    </div>
+    <div class="post-footer main-content-wrap">
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2015-03-30/automate-deploy-your-websites-with-git-hook/"  data-tooltip="使用 Git Hook 实现网站的自动部署">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2015-03-23/use-ssl-certificates-to-protect-your-website-visitors-data/" data-tooltip="使用 SSL 证书保护网站的访问">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://dearb.me/archive/2015-03-28/enable-tls-sni-to-support-multiple-certificates-on-the-same-ip/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://dearb.me/archive/2015-03-28/enable-tls-sni-to-support-multiple-certificates-on-the-same-ip/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://dearb.me/archive/2015-03-28/enable-tls-sni-to-support-multiple-certificates-on-the-same-ip/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                <i class="fa fa-comment-o"></i>
+            </a>
+        </li>
+    </ul>
+    
+</div>
+
+
+        
+            <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+        
+    </div>
+    <div class="post-bottom-bar">
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2015-03-30/automate-deploy-your-websites-with-git-hook/"  data-tooltip="使用 Git Hook 实现网站的自动部署">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2015-03-23/use-ssl-certificates-to-protect-your-website-visitors-data/" data-tooltip="使用 SSL 证书保护网站的访问">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://dearb.me/archive/2015-03-28/enable-tls-sni-to-support-multiple-certificates-on-the-same-ip/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://dearb.me/archive/2015-03-28/enable-tls-sni-to-support-multiple-certificates-on-the-same-ip/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://dearb.me/archive/2015-03-28/enable-tls-sni-to-support-multiple-certificates-on-the-same-ip/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                <i class="fa fa-comment-o"></i>
+            </a>
+        </li>
+    </ul>
+    
+</div>
+
+
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <div class="copyrights">
+        Copyrights &copy; 2021 BelinChung. All Rights Reserved.
+        
+    </div>
+    <div class="copyrights">
+    	Powered by <a href="http://hexo.io/" target="_blank" rel="nofollow">Hexo</a>  
+    </div>
+</footer>
+
+            </div>
+        </div>
+        <div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar.png"/>
+        
+            <h4 id="about-card-name">BelinChung</h4>
+        
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Guangzhou China
+            </h5>
+        
+    </div>
+</div>
+        <div id="cover" style="background-image:url('/assets/images/background.png');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script.min.js"></script>
+<!--SCRIPTS END-->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'dearb';
+        (function() {
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+</html>

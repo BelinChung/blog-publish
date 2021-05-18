@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="BelinChung&#39;s Blog">
+    <title>BelinChung&#39;s Blog - 前端工程化之前端架构及项目实践（一）</title>
+    <meta name="author" content="BelinChung">
+    <meta name="description" content="“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”">
+    <link rel="icon" href="/assets/images/favicon.ico">
+    
+        <link rel="alternative" type="application/atom+xml" title="RSS" href="atom.xml">
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-44784593-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+</head>
+
+    <body>
+        <div id="blog">
+            <header id="header">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars "></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="https://dearb.me">BelinChung&#39;s Blog</a>
+    </h1>
+    
+        <a class="header-picture-link" href="/#about">
+            <img class="header-picture" src="/assets/images/avatar.png"/>
+        </a>
+    
+</header>
+            <nav id="sidebar">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.png"/>
+                
+            </a>
+            <span class="sidebar-profile-name hide-md">BelinChung</span>
+            <span class="sidebar-profile-subtitle hide-md">a F2er</span>
+        </div>
+    
+    <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc hide-md">Home</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc hide-md">Categories</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc hide-md">Archives</span>
+                </a>
+            </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link" href="https://dearb.me/#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc hide-md">About me</span>
+                </a>
+            </li>
+        
+    </ul>
+    
+        <div class="sidebar-description">“人如果没有梦想，跟咸鱼有什么区别” “我的梦想是做一条咸鱼”</div>
+    
+
+    <ul class="sidebar-icons">
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-github" href="https://github.com/Belinchung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-twitter" href="https://twitter.com/BelinChung" target="_blank">
+                
+                </a>
+            </li>
+        
+            <li class="sidebar-icon">
+                
+                    <a  class="fa fa-envelope-o" href="mailto://belichung@gmail.com" target="_blank">
+                
+                </a>
+            </li>
+        
+    </ul>
+
+    <div class="links">
+        <span>Links</span>
+        <ul class="list">
+            
+                <li>
+                    
+                        <a href="https://love.dearb.me" target="_blank">
+                    
+                        <span class="sidebar-button-desc hide-md">Dearx</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+</nav>
+            <div id="main">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+        <div class="post-header main-content-wrap">
+    
+        <h1 class="post-title" itemprop="headline">前端工程化之前端架构及项目实践（一）</h1>
+    
+    
+</div>
+    
+    <div class="post-content markdown main-content-wrap" itemprop="articleBody">
+        <p>很久以前，就在备忘录上面写好了这篇文章的大纲，希望抽个空把这个阶段前端工程化的一些心得以文字的方式记录下来，但是万事开头难，拖了很久。而且有很多东西我更提倡用面对面的交流去阐释，所以动手写这篇文章还是因为要在公司内部做一个分享会，算是先组织下语言吧。</p>
+<p>我以前写了一篇博文叫 <a href="https://dearb.me/archive/2015-01-23/design-and-development-a-web-im-system/">《Web-IM 系统的前端设计与实现》</a> 大概的说了下当时的一些前端架构的东西。第一，那篇文章写的比较少，大概说了下；第二，前端技术发展的很快，现在这个项目的前端经过重构，已经完全跟当时不一样了，所以，还是另写一篇博文来细说下自己对前端工程化的一些看法及在项目上的实践。</p>
+<p>由于本人能力有限，这篇博文也是以我目前最高水平能写出的东西，难免会有一些差错或不理想的地方，仅供大家参考，如果有任何的建议，欢迎 Email 我，一起交流！</p>
+<a id="more"></a>
+<h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">技术选型</div><div class="line"></div><div class="line">开发规范</div><div class="line">- 编码规范</div><div class="line">- 使用 jshint		</div><div class="line"></div><div class="line">构建工具 - FIS 的使用</div><div class="line">- 第三方组件管理</div><div class="line">- 模块化</div><div class="line">- 常规的性能优化</div><div class="line">- 智能打包</div><div class="line"></div><div class="line">模块化 - 组件式开发</div><div class="line">- 目录规范</div><div class="line">- 组件仓库</div><div class="line">- 开发一个组件</div><div class="line">- 通过事件进一步解耦</div></pre></td></tr></table></figure>
+<h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>前端发展的非常快，如果你是一个热衷于追求技术的前端，你会发现越来越多的开源项目和选择，让你眼花缭乱，措手不及。不过每个前端团队都需要打造自己的前端开发体系，同时前端工程化代表着现在的前端开发不再是那种简单而无趣的远古生物，而是一个很性感的、让你情不自禁的想要去深入的美女（别想歪，我可是很纯洁的！！）。</p>
+<p>前端工程化需要哪些技术元素？让我引用瓶神的一张图来说明。因为太过于理论化的博文可能会有些无趣，我会按照自己对前端工程化的理解，重新组织文字来描述这些技术元素的构成。<br><img src="https://camo.githubusercontent.com/4c1358dc162d8b8e9594c771e5ecdde258670784/687474703a2f2f68746d6c6a732e62302e7570616979756e2e636f6d2f75706c6f6164732f313339383339343738313135352d515132303134303432352d312e706e67" alt="image-1"></p>
+<h3 id="技术选型"><a href="#技术选型" class="headerlink" title="技术选型"></a>技术选型</h3><p>技术选型没有包括在上面图片的技术元素中，不过目前我所在的团队一个好的技术选型对于前端工程化有非常大的影响。可能在大的团队中，不需要技术选型，因为已经有很完善的技术沉淀，各种轮子都自己有。</p>
+<ul>
+<li>构建工具：FIS</li>
+<li>模块加载器：mod.js (FIS 自带)</li>
+<li>MV* 框架：Vue.js</li>
+<li>动态样式语言：Less</li>
+<li>包管理：fis-components</li>
+</ul>
+<p>其中 <code>FIS</code> 和 <code>Vue.js</code> 作为一个开发工具和一个开发框架，我认为在整个技术选型中非常重要，因为它们决定了项目迅捷开发的能力、后期的可维护性以及工程化的程度。</p>
+<p>技术选型中最大的误区为了选择而选择，而是要充分考虑到项目实际、团队协作、可维护性、社区活跃程度等。</p>
+<p>构建工具，我从 Grunt 换成了 FIS 是因为 FIS 更适合大型项目；模块加载器，我从 RequireJS 换成了 mod.js 是因为既然使用了 FIS mod.js 会更容易融入到项目中；开发框架，我没有选择 AngularJS，是因为 Vue.js 轻便，入手快，这样后面的成员会很快的加入到现有的开发中。当然，AngularJS 的生态会比 Vue.js 的好。</p>
+<h3 id="开发规范"><a href="#开发规范" class="headerlink" title="开发规范"></a>开发规范</h3><p>正如瓶神所说，规范可以极大的提升开发效率，一个优秀的规范能帮助开发者快速定位问题，提升效率。而且如果团队中多人参与开发的话，开发规范还能保证代码的可维护性和可读性。</p>
+<h5 id="编码规范"><a href="#编码规范" class="headerlink" title="编码规范"></a>编码规范</h5><p>每个团队均可以根据自己的实际情况去制定适合自己团队的编码规范，通过 <code>Code Review</code> 来确保这个规范被真正实施在团队的日常开发中。唯一要确保的是，在项目伊始，这个编码规范便应该被确立下来，在后期的开发中可进行小范围的调整。</p>
+<p>这里有一个我觉得比较好的 HTML、CSS <a href="http://codeguide.bootcss.com/" target="_blank" rel="external">编码规范</a></p>
+<h5 id="使用-JSHint"><a href="#使用-JSHint" class="headerlink" title="使用 JSHint"></a>使用 JSHint</h5><p>当然，有时候仅仅通过 <code>Code Review</code> 很难避免出现老眼昏花，毕竟年纪越大，眼神就越不好。所以，我们可以通过技术手段去加强编码规范在团队的推行。</p>
+<ul>
+<li>通过给 IDE 配置 JSHint 纠正日常编码习惯</li>
+<li>通过给版本控制仓库配置 JSHint 强制拒绝不规范代码的提交</li>
+</ul>
+<p>按照我的经验，只需要一至两个月，团队成员在不需要 JSHint 的提示下就已经养成了书写符合当前团队编码规范的代码。</p>
+
+        
+            
+        
+    </div>
+    <div class="post-footer main-content-wrap">
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2015-06-03/front-end-architecture-and-project-practice-part-2/"  data-tooltip="前端工程化之前端架构及项目实践（二）">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2015-05-17/transfer-comments-from-duoshuo-to-disqus/" data-tooltip="从多说迁移博客评论至 Disqus">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://dearb.me/archive/2015-06-03/front-end-architecture-and-project-practice-part-1/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://dearb.me/archive/2015-06-03/front-end-architecture-and-project-practice-part-1/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://dearb.me/archive/2015-06-03/front-end-architecture-and-project-practice-part-1/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                <i class="fa fa-comment-o"></i>
+            </a>
+        </li>
+    </ul>
+    
+</div>
+
+
+        
+            <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+        
+    </div>
+    <div class="post-bottom-bar">
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2015-06-03/front-end-architecture-and-project-practice-part-2/"  data-tooltip="前端工程化之前端架构及项目实践（二）">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/archive/2015-05-17/transfer-comments-from-duoshuo-to-disqus/" data-tooltip="从多说迁移博客评论至 Disqus">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <ul class="post-actions post-action-share">
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://dearb.me/archive/2015-06-03/front-end-architecture-and-project-practice-part-1/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://dearb.me/archive/2015-06-03/front-end-architecture-and-project-practice-part-1/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://dearb.me/archive/2015-06-03/front-end-architecture-and-project-practice-part-1/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                <i class="fa fa-comment-o"></i>
+            </a>
+        </li>
+    </ul>
+    
+</div>
+
+
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <div class="copyrights">
+        Copyrights &copy; 2021 BelinChung. All Rights Reserved.
+        
+    </div>
+    <div class="copyrights">
+    	Powered by <a href="http://hexo.io/" target="_blank" rel="nofollow">Hexo</a>  
+    </div>
+</footer>
+
+            </div>
+        </div>
+        <div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar.png"/>
+        
+            <h4 id="about-card-name">BelinChung</h4>
+        
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Guangzhou China
+            </h5>
+        
+    </div>
+</div>
+        <div id="cover" style="background-image:url('/assets/images/background.png');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script.min.js"></script>
+<!--SCRIPTS END-->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'dearb';
+        (function() {
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+</html>
